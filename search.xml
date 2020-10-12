@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Mamba Out</title>
+    <title>Mamba Never Out</title>
     <url>/articles/4a17b156/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
@@ -21,6 +21,9 @@
 <p>That’s the dream.</p>
 <p>It’s not the destination, it’s the journey.</p>
 <p>And if you guys can understand that, what you’ll see happen is that you won’t accomplish your dreams, your dreams won’t come true, something greater will.</p>
+<p>$$</p>
+<p><span class="math display">\[\begin{equation}L_{i}=-\log \frac{e^{s\left(\cos \theta_{y_{i}}-m\right)}}{e^{s\left(\cos \theta_{y_{i}}-m\right)}+\sum_{j \neq y_{i}} e^{s \cos \left(\theta_{j}\right)}}\end{equation}\]</span></p>
+<p>$$</p>
 ]]></content>
   </entry>
 </search>
