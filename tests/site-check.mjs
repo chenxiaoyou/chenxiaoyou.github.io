@@ -20,6 +20,7 @@ const css = readRequired("assets/styles.css");
 const favicon = readRequired("assets/favicon.svg");
 const readme = readRequired("README.md");
 const js = readRequired("assets/site.js");
+const cname = readRequired("CNAME");
 const bytedanceLogo = readRequired("assets/logo-bytedance.svg");
 const profilePath = join(root, "assets/profile.png");
 const buptLogoPath = join(root, "assets/logo-bupt.png");
@@ -27,6 +28,7 @@ const njuptLogoPath = join(root, "assets/logo-njupt.png");
 const resumePath = join(root, "assets/resume.pdf");
 
 expect(html.includes("lang=\"zh-CN\""), "index.html should declare zh-CN language");
+expect(cname.trim() === "chenxiaoyou.com", "CNAME should lock GitHub Pages to chenxiaoyou.com");
 expect(html.includes("<title>辰小右</title>"), "index.html should use only the name in the browser title");
 expect(html.includes("测试开发"), "index.html should target testing/development roles");
 expect(html.includes("自动化"), "index.html should mention automation");
