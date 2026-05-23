@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">BUPT logo</title>
+  <circle cx="32" cy="32" r="31" fill="#fff"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#111" stroke-width="3"/>
+  <circle cx="32" cy="32" r="17" fill="none" stroke="#111" stroke-width="2"/>
+  <path fill="none" stroke="#111" stroke-linecap="round" stroke-width="3" d="M21 37c5-6 17-6 22 0M25 42c3-3 11-3 14 0M32 19v22"/>
+  <circle cx="32" cy="19" r="4" fill="#111"/>
+  <text x="32" y="56" fill="#111" font-family="Arial, sans-serif" font-size="9" font-weight="700" text-anchor="middle">BUPT</text>
+</svg>
