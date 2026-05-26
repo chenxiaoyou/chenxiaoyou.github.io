@@ -56,16 +56,21 @@ expect(
   /class="dock-button dock-icon blogs-link"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(dock),
   "top blog dock entry should open in a safe new tab",
 );
+expect(
+  /blogs-link[\s\S]*?dock-divider[\s\S]*?resume-link[\s\S]*?github-link[\s\S]*?email-link[\s\S]*?dock-divider[\s\S]*?data-theme-toggle[\s\S]*?data-lang-toggle/.test(dock),
+  "top utility dock should group blog, profile links, and preference controls in the requested order",
+);
+expect(
+  /class="dock-button dock-icon github-link"[\s\S]*?href="https:\/\/github\.com\/chenxiaoyou"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(dock),
+  "top utility dock should expose the GitHub profile in a safe new tab",
+);
+expect(dock.includes('href="mailto:chenxiaoyou19@gmail.com"'), "top utility dock should expose the email address");
 expect(dock.includes("data-theme-toggle"), "top utility dock should preserve theme controls");
 expect(dock.includes("data-lang-toggle"), "top utility dock should preserve language controls");
 
-expect(home.includes("getCollection(\"blogs\""), "homepage should read published Markdown blog content");
-expect(home.includes("slice(0, 3)"), "homepage should render only the latest three blog posts");
-expect(
-  /class="blogs-all"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(home),
-  "homepage all-blogs entry should open in a safe new tab",
-);
-expect(home.indexOf('id="tech-stack"') < home.indexOf('id="blogs"'), "blog module should follow the technology stack");
+expect(!home.includes("getCollection(\"blogs\""), "homepage should leave blog discovery to the utility dock");
+expect(!home.includes("BlogList"), "homepage should not render a blog preview list");
+expect(!home.includes('id="blogs"'), "homepage should not render a bottom blog section");
 expect(home.includes("测试开发"), "homepage should preserve the resume positioning");
 expect(home.includes("北京邮电大学"), "homepage should preserve education content");
 expect(home.includes("字节跳动"), "homepage should preserve work experience");
@@ -96,16 +101,18 @@ for (const token of [
 }
 expect(draft.includes("draft: true"), "a private draft fixture should exercise unpublished blog filtering");
 
-expect(css.includes(".blogs-section"), "styles should cover the homepage blogs module");
+expect(!css.includes(".blogs-section"), "styles should not retain a removed homepage blogs module");
 expect(css.includes(".blogs-page"), "styles should cover the blog list page");
 expect(css.includes(".blog-layout"), "styles should cover the article layout");
 expect(css.includes(".blog-toc"), "styles should cover the table of contents");
 expect(css.includes(".prose"), "styles should cover rendered Markdown prose");
 expect(/\.prose\s*{[^}]*width:\s*100%;/s.test(css), "Markdown prose should be constrained within mobile article width");
 expect(css.includes(".blogs-icon"), "styles should provide the blog dock icon");
+expect(css.includes(".github-icon"), "styles should provide the GitHub dock icon");
+expect(css.includes(".email-icon"), "styles should provide the email dock icon");
 expect(css.includes('[data-theme="dark"]'), "styles should preserve dark mode");
 expect(js.includes("localStorage"), "site script should persist theme and language preferences");
-expect(js.includes("blogsTitle"), "site script should translate blog interface labels");
+expect(js.includes("dockBlogs"), "site script should translate the blog dock label");
 expect(js.includes("data-i18n-date"), "site script should update blog metadata date formatting when language changes");
 
 for (const asset of [
@@ -125,8 +132,9 @@ if (existsSync(resumePath)) {
 expect(distHome.includes("辰小右"), "built homepage should include the profile");
 expect(distHome.includes('href="/blogs/"'), "built homepage should expose the blog entry");
 expect(distHome.includes('target="_blank"'), "built homepage should open blog entries in new tabs");
-expect(distHome.includes("博客"), "built homepage should label the Markdown area as 博客");
-expect(distHome.includes("如何设计可靠的自动化回归流程"), "built homepage should show the latest published blog post");
+expect(distHome.includes('href="https://github.com/chenxiaoyou"'), "built homepage should expose the GitHub dock entry");
+expect(distHome.includes('href="mailto:chenxiaoyou19@gmail.com"'), "built homepage should expose the email dock entry");
+expect(!distHome.includes("如何设计可靠的自动化回归流程"), "built homepage should not duplicate blog content below the profile");
 expect(distHome.includes('rel="canonical" href="https://www.chenxiaoyou.com/"'), "homepage should have canonical metadata");
 expect(distBlogs.includes("全部博客"), "built blog index should be generated");
 expect(distBlogs.includes("如何设计可靠的自动化回归流程"), "blog index should list published content");

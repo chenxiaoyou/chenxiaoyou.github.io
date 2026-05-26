@@ -1,12 +1,5 @@
 ---
-import { getCollection } from "astro:content";
-import BlogList from "../components/BlogList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const publishedBlogs = (await getCollection("blogs", ({ data }) => !data.draft)).sort(
-  (left, right) => right.data.publishedAt.valueOf() - left.data.publishedAt.valueOf(),
-);
-const latestBlogs = publishedBlogs.slice(0, 3);
 ---
 
 <BaseLayout
@@ -201,14 +194,5 @@ const latestBlogs = publishedBlogs.slice(0, 3);
       </div>
     </section>
 
-    <section class="section blogs-section" id="blogs" aria-labelledby="blogs-title">
-      <div class="blogs-wrap">
-        <div class="blogs-heading">
-          <h2 id="blogs-title" class="background-label" data-i18n="blogsTitle">博客</h2>
-          <a class="blogs-all" href="/blogs/" target="_blank" rel="noopener noreferrer" data-i18n="blogsAll">查看全部 ›</a>
-        </div>
-        <BlogList entries={latestBlogs} />
-      </div>
-    </section>
   </main>
 </BaseLayout>
