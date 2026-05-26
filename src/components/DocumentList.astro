@@ -23,7 +23,7 @@ const pathFor = (entry: CollectionEntry<"docs">) => `/docs/${entry.id.replace(/\
   {
     entries.map((entry) => (
       <article class="document-row">
-        <a class="document-link" href={pathFor(entry)}>
+        <a class="document-link" href={pathFor(entry)} target="_blank" rel="noopener noreferrer">
           <div class="document-main">
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>

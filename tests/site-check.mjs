@@ -51,17 +51,29 @@ expect(layout.includes("og:title"), "base layout should provide Open Graph metad
 expect(layout.includes("UtilityDock"), "base layout should share the top utility dock");
 expect(layout.includes("defer"), "base layout should defer the preference script until controls are rendered");
 expect(dock.includes("/docs/"), "top utility dock should link to the document list");
+expect(
+  /class="dock-button dock-icon docs-link"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(dock),
+  "top document dock entry should open in a safe new tab",
+);
 expect(dock.includes("data-theme-toggle"), "top utility dock should preserve theme controls");
 expect(dock.includes("data-lang-toggle"), "top utility dock should preserve language controls");
 
 expect(home.includes("getCollection(\"docs\""), "homepage should read published Markdown content");
 expect(home.includes("slice(0, 3)"), "homepage should render only the latest three documents");
+expect(
+  /class="documents-all"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(home),
+  "homepage all-documents entry should open in a safe new tab",
+);
 expect(home.indexOf('id="tech-stack"') < home.indexOf('id="documents"'), "document module should follow the technology stack");
 expect(home.includes("测试开发"), "homepage should preserve the resume positioning");
 expect(home.includes("北京邮电大学"), "homepage should preserve education content");
 expect(home.includes("字节跳动"), "homepage should preserve work experience");
 expect(dock.includes("assets/resume.pdf"), "shared utility dock should preserve resume download");
 expect(list.includes("document-row"), "shared document list should render compact document rows");
+expect(
+  /class="document-link"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(list),
+  "document article entries should open in a safe new tab",
+);
 expect(list.includes("data-i18n-date"), "document lists should localize published dates with the interface language");
 
 expect(docsIndex.includes("getCollection(\"docs\""), "document index should render collection entries");
@@ -111,6 +123,7 @@ if (existsSync(resumePath)) {
 
 expect(distHome.includes("辰小右"), "built homepage should include the profile");
 expect(distHome.includes('href="/docs/"'), "built homepage should expose the document entry");
+expect(distHome.includes('target="_blank"'), "built homepage should open document entries in new tabs");
 expect(distHome.includes("如何设计可靠的自动化回归流程"), "built homepage should show the latest published document");
 expect(distHome.includes('rel="canonical" href="https://www.chenxiaoyou.com/"'), "homepage should have canonical metadata");
 expect(distDocs.includes("全部文档"), "built documents index should be generated");
