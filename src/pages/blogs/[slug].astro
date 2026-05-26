@@ -3,7 +3,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("docs", ({ data }) => !data.draft);
+  const entries = await getCollection("blogs", ({ data }) => !data.draft);
   return entries.map((entry) => ({
     params: { slug: entry.id.replace(/\.(md|mdx)$/, "") },
     props: { entry },
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  entry: CollectionEntry<"docs">;
+  entry: CollectionEntry<"blogs">;
 }
 
 const { entry } = Astro.props;
@@ -33,14 +33,14 @@ const enFormatter = new Intl.DateTimeFormat("en-US", {
 <BaseLayout
   title={`${entry.data.title} | 辰小右`}
   description={entry.data.description}
-  canonicalPath={`/docs/${slug}/`}
+  canonicalPath={`/blogs/${slug}/`}
 >
-  <main class="doc-page section" id="content">
-    <a class="docs-back" href="/docs/" data-i18n="backDocs">‹ 返回文档</a>
-    <header class="doc-header">
+  <main class="blog-page section" id="content">
+    <a class="blogs-back" href="/blogs/" data-i18n="backBlogs">‹ 返回博客</a>
+    <header class="blog-header">
       <h1>{entry.data.title}</h1>
-      <p class="doc-description">{entry.data.description}</p>
-      <div class="doc-meta">
+      <p class="blog-description">{entry.data.description}</p>
+      <div class="blog-meta">
         <span data-i18n="publishedLabel">发布于</span>
         <time
           datetime={entry.data.publishedAt.toISOString()}
@@ -53,7 +53,7 @@ const enFormatter = new Intl.DateTimeFormat("en-US", {
         {
           entry.data.updatedAt && (
             <>
-              <span class="doc-meta-divider">/</span>
+              <span class="blog-meta-divider">/</span>
               <span data-i18n="updatedLabel">更新于</span>
               <time
                 datetime={entry.data.updatedAt.toISOString()}
@@ -67,12 +67,12 @@ const enFormatter = new Intl.DateTimeFormat("en-US", {
           )
         }
       </div>
-      <div class="document-tags" aria-label="标签">
+      <div class="blog-tags" aria-label="标签">
         {entry.data.tags.map((tag) => <span>{tag}</span>)}
       </div>
     </header>
-    <div class="doc-layout">
-      <details class="doc-toc" open>
+    <div class="blog-layout">
+      <details class="blog-toc" open>
         <summary data-i18n="tocTitle">目录</summary>
         <ol>
           {

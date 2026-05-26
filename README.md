@@ -19,9 +19,9 @@ npm test
 
 `npm run build` 会生成可直接托管的 `dist/` 静态产物。
 
-## 编写 Markdown 文档
+## 编写 Markdown 博客
 
-公开文档放在 `src/content/docs/`，新增一个 `.md` 文件即可生成 `/docs/<文件名>/` 页面。首页在技术栈后展示最近发布的 3 篇，全部文章可在 `/docs/` 查看。
+博客文章放在 `src/content/blogs/`，新增一个 `.md` 文件即可生成 `/blogs/<文件名>/` 页面。首页在技术栈后展示最近发布的 3 篇，全部文章可在 `/blogs/` 查看。
 
 Frontmatter 示例：
 
@@ -38,10 +38,10 @@ lang: zh
 ---
 ```
 
-- `draft: true` 的文档不会生成公开页面，也不会出现在列表中。
+- `draft: true` 的博客草稿不会生成公开页面，也不会出现在列表中。
 - `lang` 只表示文章原文语言；页面工具栏可以中英切换，正文不会自动翻译。
-- 文档图片放在 `public/assets/docs/<article>/` 下，并通过 `/assets/docs/<article>/<image>` 引用。
-- Markdown 阅读页支持目录、表格、图片和代码高亮。
+- 博客图片放在 `public/assets/blogs/<article>/` 下，并通过 `/assets/blogs/<article>/<image>` 引用。
+- Markdown 博客阅读页支持目录、表格、图片和代码高亮。
 
 ## 静态资源
 
@@ -62,5 +62,5 @@ lang: zh
 
 ```bash
 curl -I https://www.chenxiaoyou.com/
-curl -I https://www.chenxiaoyou.com/docs/
+curl -I https://www.chenxiaoyou.com/blogs/
 ```

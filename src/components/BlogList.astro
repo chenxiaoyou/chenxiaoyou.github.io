@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  entries: CollectionEntry<"docs">[];
+  entries: CollectionEntry<"blogs">[];
 }
 
 const { entries } = Astro.props;
@@ -16,18 +16,18 @@ const enFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
 });
-const pathFor = (entry: CollectionEntry<"docs">) => `/docs/${entry.id.replace(/\.(md|mdx)$/, "")}/`;
+const pathFor = (entry: CollectionEntry<"blogs">) => `/blogs/${entry.id.replace(/\.(md|mdx)$/, "")}/`;
 ---
 
-<div class="document-list">
+<div class="blog-list">
   {
     entries.map((entry) => (
-      <article class="document-row">
-        <a class="document-link" href={pathFor(entry)} target="_blank" rel="noopener noreferrer">
-          <div class="document-main">
+      <article class="blog-row">
+        <a class="blog-link" href={pathFor(entry)} target="_blank" rel="noopener noreferrer">
+          <div class="blog-main">
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>
-            <div class="document-tags" aria-label="标签">
+            <div class="blog-tags" aria-label="标签">
               {entry.data.tags.map((tag) => <span>{tag}</span>)}
             </div>
           </div>

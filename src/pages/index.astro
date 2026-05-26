@@ -1,17 +1,17 @@
 ---
 import { getCollection } from "astro:content";
-import DocumentList from "../components/DocumentList.astro";
+import BlogList from "../components/BlogList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const publishedDocs = (await getCollection("docs", ({ data }) => !data.draft)).sort(
+const publishedBlogs = (await getCollection("blogs", ({ data }) => !data.draft)).sort(
   (left, right) => right.data.publishedAt.valueOf() - left.data.publishedAt.valueOf(),
 );
-const latestDocs = publishedDocs.slice(0, 3);
+const latestBlogs = publishedBlogs.slice(0, 3);
 ---
 
 <BaseLayout
   title="辰小右"
-  description="辰小右的在线简历，展示测试开发、泛自动化、稳定性方向的个人介绍、教育背景、工作经历、技术栈与工程文档。"
+  description="辰小右的在线简历，展示测试开发、泛自动化、稳定性方向的个人介绍、教育背景、工作经历、技术栈与技术博客。"
   canonicalPath="/"
   mainId="hero"
 >
@@ -201,13 +201,13 @@ const latestDocs = publishedDocs.slice(0, 3);
       </div>
     </section>
 
-    <section class="section documents-section" id="documents" aria-labelledby="documents-title">
-      <div class="documents-wrap">
-        <div class="documents-heading">
-          <h2 id="documents-title" class="background-label" data-i18n="documentsTitle">文档</h2>
-          <a class="documents-all" href="/docs/" target="_blank" rel="noopener noreferrer" data-i18n="documentsAll">查看全部 ›</a>
+    <section class="section blogs-section" id="blogs" aria-labelledby="blogs-title">
+      <div class="blogs-wrap">
+        <div class="blogs-heading">
+          <h2 id="blogs-title" class="background-label" data-i18n="blogsTitle">博客</h2>
+          <a class="blogs-all" href="/blogs/" target="_blank" rel="noopener noreferrer" data-i18n="blogsAll">查看全部 ›</a>
         </div>
-        <DocumentList entries={latestDocs} />
+        <BlogList entries={latestBlogs} />
       </div>
     </section>
   </main>

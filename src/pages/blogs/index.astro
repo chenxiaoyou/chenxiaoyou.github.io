@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import BlogList from "../../components/BlogList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const publishedBlogs = (await getCollection("blogs", ({ data }) => !data.draft)).sort(
+  (left, right) => right.data.publishedAt.valueOf() - left.data.publishedAt.valueOf(),
+);
+---
+
+<BaseLayout
+  title="博客 | 辰小右"
+  description="辰小右的技术博客与工程实践记录。"
+  canonicalPath="/blogs/"
+>
+  <main class="blogs-page section" id="content">
+    <header class="blogs-header">
+      <a class="blogs-back" href="/" data-i18n="backHome">‹ 返回主页</a>
+      <h1 data-i18n="blogsIndexTitle">全部博客</h1>
+      <p data-i18n="blogsIntro">记录测试开发、自动化和稳定性工程中的实践与思考。</p>
+    </header>
+    <BlogList entries={publishedBlogs} />
+  </main>
+</BaseLayout>
