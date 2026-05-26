@@ -1,48 +1,66 @@
-# 个人求职简历单页站
+# 辰小右个人主页
 
-这是一个纯静态中文简历站，面向互联网 QA、测试开发、泛自动化和稳定性方向。首版只包含 `index.html`、样式文件和 PDF 简历入口，适合直接放到 Nginx 静态目录。
+基于 Astro 构建的静态个人主页，面向测试开发、自动化与稳定性方向的个人展示。正式站点由 Vercel 托管，域名为 [www.chenxiaoyou.com](https://www.chenxiaoyou.com)。
 
-## 本地预览
+## 本地开发
 
 ```bash
+npm install
+npm run dev
+```
+
+浏览器打开终端提示的本地地址查看页面。构建与校验命令：
+
+```bash
+npm run check
+npm run build
 npm test
-npm run serve
 ```
 
-打开 `http://127.0.0.1:4173/` 查看页面。PDF 下载入口固定为 `assets/resume.pdf`。
+`npm run build` 会生成可直接托管的 `dist/` 静态产物。
 
-## 替换内容
+## 编写 Markdown 文档
 
-- 在 `index.html` 中替换姓名、城市、邮箱、公司、经历、项目数据和教育信息。
-- 用正式简历覆盖 `assets/resume.pdf`，保持文件名不变。
-- 如果有真实头像或项目截图，可以放到 `assets/` 并在页面中引用。
+公开文档放在 `src/content/docs/`，新增一个 `.md` 文件即可生成 `/docs/<文件名>/` 页面。首页在技术栈后展示最近发布的 3 篇，全部文章可在 `/docs/` 查看。
 
-## Nginx 部署
+Frontmatter 示例：
 
-将仓库内容上传到服务器静态目录，例如 `/var/www/chenxiaoyou-blog`。示例 `server` 配置：
-
-```nginx
-server {
-    listen 80;
-    server_name example.com www.example.com;
-
-    root /var/www/chenxiaoyou-blog;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    location = /assets/resume.pdf {
-        add_header Content-Disposition "attachment; filename=resume.pdf";
-        try_files $uri =404;
-    }
-}
+```yaml
+---
+title: 如何设计可靠的自动化回归流程
+description: 文章摘要
+publishedAt: 2026-05-26
+updatedAt: 2026-05-27 # 可选
+tags:
+  - 自动化测试
+draft: false
+lang: zh
+---
 ```
 
-## 域名、DNS 与 HTTPS
+- `draft: true` 的文档不会生成公开页面，也不会出现在列表中。
+- `lang` 只表示文章原文语言；页面工具栏可以中英切换，正文不会自动翻译。
+- 文档图片放在 `public/assets/docs/<article>/` 下，并通过 `/assets/docs/<article>/<image>` 引用。
+- Markdown 阅读页支持目录、表格、图片和代码高亮。
 
-- 在域名服务商处添加 DNS 解析：`A` 记录指向服务器公网 IP，`www` 可添加 `CNAME` 或另一条 `A` 记录。
-- DNS 生效后，用 `curl -I http://example.com` 检查首页响应。
-- 建议使用 Certbot 或服务器面板签发 HTTPS 证书，并开启 HTTP 到 HTTPS 跳转。
-- 部署后验证 `https://example.com/` 和 `https://example.com/assets/resume.pdf` 都能访问。
+## 静态资源
+
+- 简历下载文件：`public/assets/resume.pdf`
+- 头像与组织 Logo：`public/assets/`
+- 全局交互与主题样式：`public/assets/site.js`、`public/assets/styles.css`
+
+## Vercel 发布
+
+本项目仅维护 Vercel 正式发布链路，不再依赖 GitHub Pages 的 `CNAME` 文件或 Nginx 配置。
+
+1. 在 Vercel 导入 GitHub 仓库。
+2. Framework Preset 选择 Astro，构建命令使用 `npm run build`，输出目录为 `dist`。
+3. 在 Vercel 中绑定 `www.chenxiaoyou.com`，并将 DNS 按 Vercel 提示指向其域名服务。
+4. 推送到 GitHub 后，Vercel 自动构建并发布。
+
+部署后验证：
+
+```bash
+curl -I https://www.chenxiaoyou.com/
+curl -I https://www.chenxiaoyou.com/docs/
+```

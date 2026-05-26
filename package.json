@@ -1,10 +1,21 @@
 {
   "name": "chenxiaoyou-resume-site",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/site-check.mjs",
-    "serve": "python3 -m http.server 4173"
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "serve": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test": "npm run build && node tests/site-check.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.3.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
   }
 }

@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entries: CollectionEntry<"docs">[];
+}
+
+const { entries } = Astro.props;
+const zhFormatter = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+const enFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+const pathFor = (entry: CollectionEntry<"docs">) => `/docs/${entry.id.replace(/\.(md|mdx)$/, "")}/`;
+---
+
+<div class="document-list">
+  {
+    entries.map((entry) => (
+      <article class="document-row">
+        <a class="document-link" href={pathFor(entry)}>
+          <div class="document-main">
+            <h3>{entry.data.title}</h3>
+            <p>{entry.data.description}</p>
+            <div class="document-tags" aria-label="标签">
+              {entry.data.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </div>
+          <time
+            datetime={entry.data.publishedAt.toISOString()}
+            data-i18n-date
+            data-date-zh={zhFormatter.format(entry.data.publishedAt)}
+            data-date-en={enFormatter.format(entry.data.publishedAt)}
+          >
+            {zhFormatter.format(entry.data.publishedAt)}
+          </time>
+          <span class="row-arrow" aria-hidden="true">›</span>
+        </a>
+      </article>
+    ))
+  }
+</div>

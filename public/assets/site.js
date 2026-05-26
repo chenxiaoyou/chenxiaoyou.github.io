@@ -1,8 +1,9 @@
 const translations = {
   zh: {
-    skip: "跳到关于我",
+    skip: "跳到正文",
     name: "辰小右",
     dockResume: "简历",
+    dockDocs: "文档",
     languageToggle: "切换语言",
     currentLanguageLabel: "中",
     role: "测试开发 / 泛自动化 / 稳定性工程",
@@ -57,14 +58,24 @@ const translations = {
     skillGrafana: "看板 / 趋势",
     skillLog: "问题定位",
     skillAlert: "风险前置",
+    documentsTitle: "文档",
+    documentsIndexTitle: "全部文档",
+    documentsAll: "查看全部 ›",
+    documentsIntro: "记录测试开发、自动化和稳定性工程中的实践与思考。",
+    backHome: "‹ 返回主页",
+    backDocs: "‹ 返回文档",
+    publishedLabel: "发布于",
+    updatedLabel: "更新于",
+    tocTitle: "目录",
     profileAlt: "辰小右头像",
     themeDark: "暗",
     themeLight: "亮",
   },
   en: {
-    skip: "Skip to about",
+    skip: "Skip to content",
     name: "Chen Xiaoyou",
     dockResume: "Resume",
+    dockDocs: "Documents",
     languageToggle: "Switch language",
     currentLanguageLabel: "EN",
     role: "Test Development / Automation / Reliability",
@@ -119,6 +130,15 @@ const translations = {
     skillGrafana: "Dashboards / trends",
     skillLog: "Issue diagnosis",
     skillAlert: "Risk shift-left",
+    documentsTitle: "Documents",
+    documentsIndexTitle: "All documents",
+    documentsAll: "View all ›",
+    documentsIntro: "Notes on testing, automation, and reliability engineering.",
+    backHome: "‹ Back home",
+    backDocs: "‹ Back to documents",
+    publishedLabel: "Published",
+    updatedLabel: "Updated",
+    tocTitle: "Contents",
     profileAlt: "Chen Xiaoyou profile photo placeholder",
     themeDark: "Dark",
     themeLight: "Light",
@@ -153,6 +173,10 @@ function applyLanguage(lang) {
   for (const element of document.querySelectorAll("[data-i18n-skill]")) {
     const key = element.dataset.i18nSkill;
     if (dictionary[key]) element.dataset.skill = dictionary[key];
+  }
+  for (const element of document.querySelectorAll("[data-i18n-date]")) {
+    const localizedDate = lang === "zh" ? element.dataset.dateZh : element.dataset.dateEn;
+    if (localizedDate) element.textContent = localizedDate;
   }
   if (langButton) {
     langButton.textContent = dictionary.currentLanguageLabel;
