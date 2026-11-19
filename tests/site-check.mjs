@@ -17,103 +17,111 @@ function readRequired(path) {
 
 const pkg = readRequired("package.json");
 const astroConfig = readRequired("astro.config.mjs");
-const contentConfig = readRequired("src/content.config.ts");
+const workflow = readRequired(".github/workflows/deploy.yml");
 const layout = readRequired("src/layouts/BaseLayout.astro");
 const dock = readRequired("src/components/UtilityDock.astro");
-const list = readRequired("src/components/BlogList.astro");
+const hero = readRequired("src/components/Hero.astro");
+const about = readRequired("src/components/About.astro");
+const background = readRequired("src/components/Background.astro");
+const projects = readRequired("src/components/Projects.astro");
+const footer = readRequired("src/components/SiteFooter.astro");
 const home = readRequired("src/pages/index.astro");
-const blogsIndex = readRequired("src/pages/blogs/index.astro");
-const blogPage = readRequired("src/pages/blogs/[slug].astro");
-const sample = readRequired("src/content/blogs/reliable-automation-regression.md");
-const draft = readRequired("src/content/blogs/private-draft.md");
 const css = readRequired("public/assets/styles.css");
 const js = readRequired("public/assets/site.js");
 const readme = readRequired("README.md");
 const distHome = readRequired("dist/index.html");
-const distBlogs = readRequired("dist/blogs/index.html");
-const distArticle = readRequired("dist/blogs/reliable-automation-regression/index.html");
 
 expect(pkg.includes("\"astro\""), "package.json should depend on Astro");
 expect(pkg.includes("astro build"), "package.json should expose the Astro static build");
-expect(pkg.includes("ASTRO_TELEMETRY_DISABLED=1"), "project scripts should disable Astro telemetry during local and hosted builds");
+expect(pkg.includes("ASTRO_TELEMETRY_DISABLED=1"), "project scripts should disable Astro telemetry");
 expect(pkg.includes("astro check"), "package.json should expose Astro validation");
-expect(astroConfig.includes("https://www.chenxiaoyou.com"), "Astro canonical site should use the Vercel www domain");
+
+expect(astroConfig.includes("https://chenxiaoyou.github.io"), "Astro canonical site should use the GitHub Pages domain");
 expect(astroConfig.includes("output: \"static\""), "Astro should generate static output");
-expect(!existsSync(join(root, "CNAME")), "GitHub Pages CNAME should be removed for the Vercel-only site");
+expect(!existsSync(join(root, "CNAME")), "GitHub Pages user site should not carry a CNAME file");
 
-for (const schemaField of ["title", "description", "publishedAt", "updatedAt", "tags", "draft", "lang"]) {
-  expect(contentConfig.includes(schemaField), `blogs content schema should define ${schemaField}`);
-}
-expect(contentConfig.includes("const blogs"), "content collection should use the blogs name");
-expect(contentConfig.includes("src/content/blogs"), "blogs collection should load Markdown files from the blog content directory");
+expect(workflow.includes("branches: [main]"), "deploy workflow should trigger on pushes to main");
+expect(workflow.includes("withastro/action"), "deploy workflow should build with the official Astro action");
+expect(workflow.includes("actions/deploy-pages"), "deploy workflow should publish with actions/deploy-pages");
+expect(workflow.includes("id-token: write"), "deploy workflow should grant Pages deployment permissions");
 
-expect(layout.includes('canonicalURL'), "base layout should expose canonical metadata");
+expect(layout.includes("canonicalURL"), "base layout should expose canonical metadata");
 expect(layout.includes("og:title"), "base layout should provide Open Graph metadata");
-expect(layout.includes("UtilityDock"), "base layout should share the top utility dock");
-expect(layout.includes("defer"), "base layout should defer the preference script until controls are rendered");
-expect(dock.includes("/blogs/"), "top utility dock should link to the blog list");
-expect(
-  /class="dock-button dock-icon blogs-link"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(dock),
-  "top blog dock entry should open in a safe new tab",
-);
-expect(
-  /blogs-link[\s\S]*?dock-divider[\s\S]*?resume-link[\s\S]*?github-link[\s\S]*?email-link[\s\S]*?dock-divider[\s\S]*?data-theme-toggle[\s\S]*?data-lang-toggle/.test(dock),
-  "top utility dock should group blog, profile links, and preference controls in the requested order",
-);
-expect(
-  /class="dock-button dock-icon github-link"[\s\S]*?href="https:\/\/github\.com\/chenxiaoyou"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(dock),
-  "top utility dock should expose the GitHub profile in a safe new tab",
-);
-expect(dock.includes('href="mailto:chenxiaoyou19@gmail.com"'), "top utility dock should expose the email address");
-expect(dock.includes("data-theme-toggle"), "top utility dock should preserve theme controls");
-expect(dock.includes("data-lang-toggle"), "top utility dock should preserve language controls");
+expect(layout.includes("og:image"), "base layout should provide an Open Graph image");
+expect(layout.includes("UtilityDock"), "base layout should share the fixed navigation");
+expect(layout.includes("site-theme"), "base layout should restore the persisted theme before first paint");
+expect(layout.includes("defer"), "base layout should defer the site script until the page is parsed");
 
-expect(!home.includes("getCollection(\"blogs\""), "homepage should leave blog discovery to the utility dock");
-expect(!home.includes("BlogList"), "homepage should not render a blog preview list");
-expect(!home.includes('id="blogs"'), "homepage should not render a bottom blog section");
-expect(home.includes("测试开发"), "homepage should preserve the resume positioning");
-expect(home.includes("北京邮电大学"), "homepage should preserve education content");
-expect(home.includes("字节跳动"), "homepage should preserve work experience");
-expect(dock.includes("assets/resume.pdf"), "shared utility dock should preserve resume download");
-expect(list.includes("blog-row"), "shared blog list should render compact blog rows");
-expect(
-  /class="blog-link"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/.test(list),
-  "blog article entries should open in a safe new tab",
-);
-expect(list.includes("data-i18n-date"), "blog lists should localize published dates with the interface language");
-
-expect(blogsIndex.includes("getCollection(\"blogs\""), "blog index should render collection entries");
-expect(blogPage.includes("getStaticPaths"), "blog detail pages should be statically generated");
-expect(blogPage.includes("render("), "blog detail pages should render Markdown");
-expect(blogPage.includes("headings"), "blog detail pages should expose a table of contents");
-expect(blogPage.includes("blog-toc"), "blog detail pages should include a table of contents UI");
-expect(blogPage.includes("data-i18n-date"), "blog metadata dates should localize with the interface language");
-
-for (const token of [
-  "title: 如何设计可靠的自动化回归流程",
-  "publishedAt:",
-  "tags:",
-  "## 回归流程的核心目标",
-  "```python",
-  "| 阶段 |",
-]) {
-  expect(sample.includes(token), `sample Markdown should include ${token}`);
+for (const anchor of ["#about", "#experience", "#projects", "#contact"]) {
+  expect(dock.includes(`href="${anchor}"`), `navigation should link to ${anchor}`);
 }
-expect(draft.includes("draft: true"), "a private draft fixture should exercise unpublished blog filtering");
+expect(dock.includes("data-nav"), "navigation links should expose scrollspy targets");
+expect(dock.includes("assets/resume.pdf"), "navigation should preserve resume download");
+expect(dock.includes("download"), "resume navigation entry should download the PDF");
+expect(dock.includes("data-theme-toggle"), "navigation should preserve theme controls");
+expect(dock.includes("data-lang-toggle"), "navigation should preserve language controls");
+expect(!dock.includes("/blogs/"), "navigation should not link to removed blog routes");
 
-expect(!css.includes(".blogs-section"), "styles should not retain a removed homepage blogs module");
-expect(css.includes(".blogs-page"), "styles should cover the blog list page");
-expect(css.includes(".blog-layout"), "styles should cover the article layout");
-expect(css.includes(".blog-toc"), "styles should cover the table of contents");
-expect(css.includes(".prose"), "styles should cover rendered Markdown prose");
-expect(/\.prose\s*{[^}]*width:\s*100%;/s.test(css), "Markdown prose should be constrained within mobile article width");
-expect(css.includes(".blogs-icon"), "styles should provide the blog dock icon");
-expect(css.includes(".github-icon"), "styles should provide the GitHub dock icon");
-expect(css.includes(".email-icon"), "styles should provide the email dock icon");
-expect(css.includes('[data-theme="dark"]'), "styles should preserve dark mode");
+expect(home.includes("import Hero"), "homepage should compose the Hero section");
+expect(home.includes("import About"), "homepage should compose the About section");
+expect(home.includes("import Background"), "homepage should compose the Experience section");
+expect(home.includes("import Projects"), "homepage should compose the Projects section");
+expect(home.includes("import SiteFooter"), "homepage should compose the contact footer");
+expect(!home.includes("getCollection"), "homepage should not reference removed content collections");
+
+expect(hero.includes("terminal-chip"), "hero should keep the terminal-style flourish");
+expect(hero.includes("#projects"), "hero CTA should point to the projects section");
+expect(hero.includes("assets/resume.pdf"), "hero CTA should offer the resume download");
+expect(hero.includes("https://github.com/chenxiaoyou"), "hero CTA should link the GitHub profile");
+
+expect(about.includes("五年多互联网测试开发经验"), "about copy should keep the real experience summary");
+expect(about.includes("aboutPointOne"), "about should keep highlight point one");
+expect(about.includes("aboutPointThree"), "about should keep highlight point three");
+
+expect(background.includes("字节跳动"), "experience timeline should preserve work experience");
+expect(background.includes("北京邮电大学"), "experience timeline should preserve education content");
+expect(background.includes("南京邮电大学"), "experience timeline should preserve undergraduate education");
+expect(background.includes("data-detail-toggle"), "experience timeline should keep expandable work details");
+expect(background.includes("terminal-key-problem"), "work details should keep the terminal narrative");
+expect(background.includes("data-icon=\"PY\""), "tech stack should keep skill chips");
+
+expect(projects.includes("projectApiTitle"), "projects should include api_auto_test");
+expect(projects.includes("projectMewcodeTitle"), "projects should include mewcode internals");
+expect(projects.includes("projectMewhelpTitle"), "projects should include mewhelp internals");
+expect(projects.includes("projectEvalTitle"), "projects should include AI evaluation practice");
+expect(
+  projects.includes("https://github.com/chenxiaoyou/api_auto_test"),
+  "api_auto_test card should link its repository",
+);
+expect(!projects.includes("/blogs/"), "project cards should not link to removed blog routes");
+
+expect(footer.includes("mailto:chenxiaoyou19@gmail.com"), "footer should expose the email address");
+expect(footer.includes("https://github.com/chenxiaoyou"), "footer should expose the GitHub profile");
+expect(footer.includes("assets/resume.pdf"), "footer should offer the resume download");
+expect(footer.includes("footer-copy"), "footer should render the copyright line");
+
+expect(js.includes("navAbout"), "site script should translate the navigation");
+expect(js.includes("projectsTitle"), "site script should translate the projects section");
+expect(js.includes("footerCta"), "site script should translate the footer CTA");
+expect(!js.includes("dockBlogs"), "site script should drop removed blog keys");
 expect(js.includes("localStorage"), "site script should persist theme and language preferences");
-expect(js.includes("dockBlogs"), "site script should translate the blog dock label");
-expect(js.includes("data-i18n-date"), "site script should update blog metadata date formatting when language changes");
+expect(js.includes("IntersectionObserver"), "site script should drive scroll reveals and scrollspy");
+expect(js.includes("prefers-reduced-motion"), "site script should respect reduced motion preferences");
+expect(js.includes("data-reveal"), "site script should manage reveal elements");
+expect(js.includes("data-nav"), "site script should manage scrollspy navigation");
+expect(js.includes("closest(\".timeline-item\")"), "detail toggles should target the timeline item");
+
+expect(css.includes("[data-theme=\"light\"]"), "styles should provide the light theme token set");
+expect(css.includes(".site-nav"), "styles should cover the fixed navigation");
+expect(css.includes(".hero-name"), "styles should cover the hero headline");
+expect(css.includes(".timeline"), "styles should cover the experience timeline");
+expect(css.includes(".project-card"), "styles should cover project cards");
+expect(css.includes(".site-footer"), "styles should cover the contact footer");
+expect(css.includes("html.js [data-reveal]"), "reveal animations should only apply when JS is available");
+expect(css.includes("prefers-reduced-motion"), "styles should respect reduced motion preferences");
+expect(css.includes("--gradient"), "styles should define the accent gradient token");
+expect(!css.includes(".prose"), "styles should not retain removed blog prose styles");
+expect(!css.includes(".blog-toc"), "styles should not retain removed blog TOC styles");
 
 for (const asset of [
   "public/assets/profile.png",
@@ -130,28 +138,20 @@ if (existsSync(resumePath)) {
 }
 
 expect(distHome.includes("辰小右"), "built homepage should include the profile");
-expect(distHome.includes('href="/blogs/"'), "built homepage should expose the blog entry");
-expect(distHome.includes('target="_blank"'), "built homepage should open blog entries in new tabs");
-expect(distHome.includes('href="https://github.com/chenxiaoyou"'), "built homepage should expose the GitHub dock entry");
-expect(distHome.includes('href="mailto:chenxiaoyou19@gmail.com"'), "built homepage should expose the email dock entry");
-expect(!distHome.includes("如何设计可靠的自动化回归流程"), "built homepage should not duplicate blog content below the profile");
-expect(distHome.includes('rel="canonical" href="https://www.chenxiaoyou.com/"'), "homepage should have canonical metadata");
-expect(distBlogs.includes("全部博客"), "built blog index should be generated");
-expect(distBlogs.includes("如何设计可靠的自动化回归流程"), "blog index should list published content");
-expect(!distBlogs.includes("仅供草稿验证"), "blog index should hide drafts");
-expect(distArticle.includes("如何设计可靠的自动化回归流程"), "built article should render its title");
-expect(distArticle.includes("<table"), "built article should render Markdown tables");
-expect(distArticle.includes("astro-code"), "built article should highlight fenced code");
-expect(distArticle.includes("blog-toc"), "built article should render its table of contents");
-expect(!existsSync(join(root, "dist/blogs/private-draft/index.html")), "draft entries should not generate public routes");
-expect(!existsSync(join(root, "dist/docs/index.html")), "legacy docs routes should not remain in the static output");
-expect(!distHome.includes('href="/docs/"'), "built homepage should not expose the legacy docs route");
+expect(distHome.includes('rel="canonical" href="https://chenxiaoyou.github.io/"'), "homepage should have canonical metadata");
+expect(distHome.includes('href="https://github.com/chenxiaoyou"'), "built homepage should link the GitHub profile");
+expect(distHome.includes("mailto:chenxiaoyou19@gmail.com"), "built homepage should link the email address");
+expect(distHome.includes("api_auto_test"), "built homepage should render the projects section");
+expect(distHome.includes("href=\"#projects\""), "built homepage should anchor to the projects section");
+expect(!distHome.includes("/blogs/"), "built homepage should not expose removed blog routes");
+expect(!existsSync(join(root, "dist/blogs")), "removed blog routes should not generate static output");
+expect(!existsSync(join(root, "dist/docs")), "legacy docs routes should not remain in the static output");
 
-for (const word of ["Vercel", "www.chenxiaoyou.com", "Markdown", "src/content/blogs", "npm run build"]) {
+for (const word of ["GitHub Pages", "chenxiaoyou.github.io", "src/components", "npm run build", "translations"]) {
   expect(readme.includes(word), `README.md should document ${word}`);
 }
-for (const source of [contentConfig, dock, list, home, blogsIndex, blogPage, js, readme]) {
-  expect(!source.includes("/docs/") && !source.includes("src/content/docs"), "site sources should no longer expose docs paths");
+for (const source of [dock, hero, about, background, projects, footer, js, readme]) {
+  expect(!source.includes("/docs/") && !source.includes("src/content"), "site sources should no longer reference removed content routes");
 }
 
 if (failures.length) {
@@ -160,4 +160,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Astro blog site check passed.");
+console.log("One-page homepage site check passed.");

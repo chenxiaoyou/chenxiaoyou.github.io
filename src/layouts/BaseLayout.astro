@@ -8,12 +8,13 @@ interface Props {
   mainId?: string;
 }
 
-const { title, description, canonicalPath, mainId = "content" } = Astro.props;
+const { title, description, canonicalPath, mainId = "hero" } = Astro.props;
 const canonicalURL = new URL(canonicalPath, Astro.site);
+const ogImage = new URL("/assets/profile.png", Astro.site);
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark" data-lang="zh">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,10 +24,23 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="theme-color" content="#111111" />
+    <meta name="theme-color" content="#070b12" />
     <link rel="icon" href="/assets/profile.png" type="image/png" />
     <link rel="stylesheet" href="/assets/styles.css" />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add("js");
+        try {
+          const theme = localStorage.getItem("site-theme");
+          if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+          const lang = localStorage.getItem("site-language");
+          if (lang === "zh" || lang === "en") root.dataset.lang = lang;
+        } catch {}
+      })();
+    </script>
     <script is:inline src="/assets/site.js" defer></script>
   </head>
   <body>

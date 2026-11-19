@@ -1,6 +1,6 @@
 {
-  "name": "chenxiaoyou-resume-site",
-  "version": "0.2.0",
+  "name": "chenxiaoyou-homepage",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {

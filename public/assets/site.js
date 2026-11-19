@@ -3,11 +3,15 @@ const translations = {
     skip: "跳到正文",
     name: "辰小右",
     dockResume: "简历",
-    dockBlogs: "博客",
     dockGithub: "GitHub",
     dockEmail: "发送邮件",
     languageToggle: "切换语言",
     currentLanguageLabel: "中",
+    navAbout: "关于",
+    navExperience: "经历",
+    navProjects: "项目",
+    navContact: "联系",
+    heroTerminalOut: "辰小右 @ 质量工程",
     role: "测试开发 / 泛自动化 / 稳定性工程",
     intro: "我关注用工程化方式提升质量效率，长期投入自动化测试、CI 质量门禁、稳定性巡检和故障复盘。",
     brandTagline: "Quality Engineering / Automation / Reliability",
@@ -15,14 +19,20 @@ const translations = {
     signalAuto: "自动化巡检",
     signalReliability: "稳定性治理",
     signalReview: "故障复盘",
+    ctaProjects: "查看项目",
+    ctaResume: "下载简历",
+    ctaGithub: "GitHub",
+    scrollHint: "向下滚动",
     aboutTitle: "关于我",
-    aboutCopy: "这里先占位：补充职业方向、优势和目标岗位。",
-    aboutPointOne: "求职方向待补充",
-    aboutPointTwo: "个人优势待补充",
-    aboutPointThree: "近期关注待补充",
-    backgroundTitle: "教育与工作背景",
-    educationTitle: "教育背景",
-    workTitle: "工作经历",
+    aboutCopy:
+      "五年多互联网测试开发经验，主攻泛自动化建设与稳定性建设：从自动化用例与框架、CI 质量门禁，到稳定性巡检与故障复盘，把质量工程沉淀为可复用的体系。当前正系统深入 AI Agent 与 AI 评测（mewcode / mewhelp），探索质量工程的下一站。",
+    aboutPointOne: "五年+ 测试开发 · 字节跳动",
+    aboutPointTwo: "泛自动化建设 × 稳定性工程",
+    aboutPointThree: "AI Agent 与 AI 评测学习中",
+    expTitle: "经历",
+    badgeWork: "工作",
+    badgeEdu: "教育",
+    badgeCurrent: "当前",
     eduBuptName: "北京邮电大学",
     eduBuptDesc: "硕士 | 电子与通信工程",
     eduNjuptName: "南京邮电大学",
@@ -34,7 +44,7 @@ const translations = {
     workDetailToggle: "展开工作内容",
     workProblem: "业务迭代快，质量回归和稳定性风险需要更早暴露。",
     workAction: "建设自动化用例、CI 门禁、巡检脚本和问题复盘链路。",
-    workResult: "指标暂留占位：补充覆盖率、拦截率、耗时下降等结果。",
+    workResult: "自动化回归覆盖核心链路，版本回归耗时显著下降，线上风险通过巡检与复盘持续收敛。",
     eduBuptHome: "打开北京邮电大学主页",
     eduNjuptHome: "打开南京邮电大学主页",
     techTitle: "技术栈",
@@ -42,8 +52,6 @@ const translations = {
     techEngineeringTitle: "工程语言",
     techCiTitle: "CI / 工具链",
     techReliabilityTitle: "稳定性观测",
-    techLogChip: "日志分析",
-    techAlertChip: "告警巡检",
     skillPython: "脚本 / 平台 / 数据处理",
     skillPytest: "接口 / 回归 / 断言",
     skillPlaywright: "Web E2E / 录制回放",
@@ -60,13 +68,24 @@ const translations = {
     skillGrafana: "看板 / 趋势",
     skillLog: "问题定位",
     skillAlert: "风险前置",
-    blogsIndexTitle: "全部博客",
-    blogsIntro: "记录测试开发、自动化和稳定性工程中的实践与思考。",
-    backHome: "‹ 返回主页",
-    backBlogs: "‹ 返回博客",
-    publishedLabel: "发布于",
-    updatedLabel: "更新于",
-    tocTitle: "目录",
+    projectsTitle: "作品项目",
+    projectApiTitle: "api_auto_test",
+    projectApiStatus: "建设中",
+    projectApiDesc: "自建接口自动化测试框架：pytest 分层与数据驱动设计，Allure 报告与 Jenkins 调度一体化。",
+    projectMewcodeTitle: "mewcode 源码拆解",
+    projectMewcodeStatus: "学习中",
+    projectMewcodeDesc: "从源码拆解 Coding Agent 核心机制：agent loop、工具调用与权限、记忆与多智能体协作。",
+    projectMewhelpTitle: "mewhelp 源码拆解",
+    projectMewhelpStatus: "学习中",
+    projectMewhelpDesc: "拆解 RAG 知识库助手全链路：知识库构建、检索增强生成与 Langfuse 可观测性。",
+    projectEvalTitle: "AI 评测实践",
+    projectEvalStatus: "规划中",
+    projectEvalDesc: "用测试开发的方法评测 Agent：评测集建设、指标体系、LLM-as-judge 与效果回归。",
+    projectRepoLink: "查看仓库 ›",
+    footerCta: "有想法，聊聊看。",
+    footerSub: "邮件通常当天回复，也可以在 GitHub 上找到我。",
+    footerEmailCta: "发邮件给我",
+    footerBuilt: " · 用 Astro 构建",
     profileAlt: "辰小右头像",
     themeDark: "暗",
     themeLight: "亮",
@@ -75,11 +94,15 @@ const translations = {
     skip: "Skip to content",
     name: "Chen Xiaoyou",
     dockResume: "Resume",
-    dockBlogs: "Blog",
     dockGithub: "GitHub",
     dockEmail: "Send email",
     languageToggle: "Switch language",
     currentLanguageLabel: "EN",
+    navAbout: "About",
+    navExperience: "Experience",
+    navProjects: "Projects",
+    navContact: "Contact",
+    heroTerminalOut: "chenxiaoyou @ quality-engineering",
     role: "Test Development / Automation / Reliability",
     intro: "I focus on improving quality through engineering practices across automation, CI quality gates, reliability checks, and incident review.",
     brandTagline: "Quality Engineering / Automation / Reliability",
@@ -87,14 +110,20 @@ const translations = {
     signalAuto: "Automation Checks",
     signalReliability: "Reliability Control",
     signalReview: "Incident Review",
+    ctaProjects: "View projects",
+    ctaResume: "Download resume",
+    ctaGithub: "GitHub",
+    scrollHint: "Scroll down",
     aboutTitle: "About",
-    aboutCopy: "Placeholder for now: add your direction, strengths, and target role.",
-    aboutPointOne: "Target role TBD",
-    aboutPointTwo: "Core strengths TBD",
-    aboutPointThree: "Current focus TBD",
-    backgroundTitle: "Education and Work Background",
-    educationTitle: "Education",
-    workTitle: "Work Experience",
+    aboutCopy:
+      "Five-plus years of internet test development experience, focused on automation infrastructure and stability engineering — from automated suites and frameworks and CI quality gates to reliability inspection and incident review. Currently going deep on AI agents and AI evaluation (mewcode / mewhelp), exploring what quality engineering looks like next.",
+    aboutPointOne: "5+ years in test development · ByteDance",
+    aboutPointTwo: "Automation infrastructure × stability engineering",
+    aboutPointThree: "Currently learning AI agents & AI evaluation",
+    expTitle: "Experience",
+    badgeWork: "Work",
+    badgeEdu: "Education",
+    badgeCurrent: "Current",
     eduBuptName: "Beijing University of Posts and Telecommunications",
     eduBuptDesc: "M.S. | Electronic and Communication Engineering",
     eduNjuptName: "Nanjing University of Posts and Telecommunications",
@@ -106,7 +135,7 @@ const translations = {
     workDetailToggle: "Expand work details",
     workProblem: "Fast product iteration needs earlier exposure of regression and reliability risk.",
     workAction: "Build automated tests, CI gates, inspection scripts, and review workflows.",
-    workResult: "Metric placeholders: add coverage, interception rate, time saved, and reliability outcomes.",
+    workResult: "Automated regression now covers core paths, release regression time has dropped notably, and online risk keeps converging through checks and incident reviews.",
     eduBuptHome: "Open BUPT homepage",
     eduNjuptHome: "Open NJUPT homepage",
     techTitle: "Tech Stack",
@@ -114,8 +143,6 @@ const translations = {
     techEngineeringTitle: "Engineering Languages",
     techCiTitle: "CI / Tooling",
     techReliabilityTitle: "Reliability Observability",
-    techLogChip: "Log Analysis",
-    techAlertChip: "Alert Checks",
     skillPython: "Scripts / platforms / data",
     skillPytest: "API / regression / asserts",
     skillPlaywright: "Web E2E / replay",
@@ -132,14 +159,25 @@ const translations = {
     skillGrafana: "Dashboards / trends",
     skillLog: "Issue diagnosis",
     skillAlert: "Risk shift-left",
-    blogsIndexTitle: "All Posts",
-    blogsIntro: "Notes on testing, automation, and reliability engineering.",
-    backHome: "‹ Back home",
-    backBlogs: "‹ Back to blog",
-    publishedLabel: "Published",
-    updatedLabel: "Updated",
-    tocTitle: "Contents",
-    profileAlt: "Chen Xiaoyou profile photo placeholder",
+    projectsTitle: "Projects",
+    projectApiTitle: "api_auto_test",
+    projectApiStatus: "In progress",
+    projectApiDesc: "Self-built API test framework: layered, data-driven pytest with Allure reporting and Jenkins scheduling.",
+    projectMewcodeTitle: "mewcode Internals",
+    projectMewcodeStatus: "Learning",
+    projectMewcodeDesc: "Source-level breakdown of a coding agent: agent loop, tool calls and permissions, memory, and multi-agent teams.",
+    projectMewhelpTitle: "mewhelp Internals",
+    projectMewhelpStatus: "Learning",
+    projectMewhelpDesc: "End-to-end breakdown of a RAG knowledge assistant: KB building, retrieval-augmented generation, and Langfuse observability.",
+    projectEvalTitle: "AI Evaluation",
+    projectEvalStatus: "Planned",
+    projectEvalDesc: "Evaluate agents the way testers do: eval datasets, metrics, LLM-as-judge, and quality regression.",
+    projectRepoLink: "View repo ›",
+    footerCta: "Have an idea? Let's talk.",
+    footerSub: "Emails usually get a same-day reply — or find me on GitHub.",
+    footerEmailCta: "Email me",
+    footerBuilt: " · Built with Astro",
+    profileAlt: "Chen Xiaoyou profile photo",
     themeDark: "Dark",
     themeLight: "Light",
   },
@@ -149,6 +187,7 @@ const root = document.documentElement;
 const langButton = document.querySelector("[data-lang-toggle]");
 const themeButton = document.querySelector("[data-theme-toggle]");
 const detailToggles = document.querySelectorAll("[data-detail-toggle]");
+const navLinks = document.querySelectorAll("[data-nav]");
 
 function applyLanguage(lang) {
   const dictionary = translations[lang] || translations.zh;
@@ -174,10 +213,6 @@ function applyLanguage(lang) {
     const key = element.dataset.i18nSkill;
     if (dictionary[key]) element.dataset.skill = dictionary[key];
   }
-  for (const element of document.querySelectorAll("[data-i18n-date]")) {
-    const localizedDate = lang === "zh" ? element.dataset.dateZh : element.dataset.dateEn;
-    if (localizedDate) element.textContent = localizedDate;
-  }
   if (langButton) {
     langButton.textContent = dictionary.currentLanguageLabel;
     langButton.classList.toggle("is-active", lang === "en");
@@ -202,7 +237,7 @@ if (langButton) {
   langButton.addEventListener("click", () => {
     const nextLang = root.dataset.lang === "zh" ? "en" : "zh";
     applyLanguage(nextLang);
-    applyTheme(root.dataset.theme || "light");
+    applyTheme(root.dataset.theme || "dark");
   });
 }
 
@@ -219,12 +254,52 @@ for (const toggle of detailToggles) {
     const isExpanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!isExpanded));
     toggle.classList.toggle("is-expanded", !isExpanded);
-    toggle.closest(".background-row")?.classList.toggle("is-expanded", !isExpanded);
+    toggle.closest(".timeline-item")?.classList.toggle("is-expanded", !isExpanded);
     detail.hidden = isExpanded;
   });
 }
 
-const preferredTheme = localStorage.getItem("site-theme") || "light";
+// 滚动进入动画：尊重系统减少动态偏好，无 JS 环境下由 CSS 兜底显示
+const revealItems = document.querySelectorAll("[data-reveal]");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduceMotion && "IntersectionObserver" in window && root.classList.contains("js")) {
+  const revealer = new IntersectionObserver(
+    (entries, observer) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+  );
+  for (const item of revealItems) revealer.observe(item);
+} else {
+  for (const item of revealItems) item.classList.add("is-visible");
+}
+
+// 导航 scrollspy：当前章节对应的锚点高亮
+const spyTargets = [...navLinks]
+  .map((link) => link.dataset.nav)
+  .filter(Boolean)
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
+if ("IntersectionObserver" in window && spyTargets.length) {
+  const spy = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        for (const link of navLinks) {
+          link.classList.toggle("is-active", link.dataset.nav === entry.target.id);
+        }
+      }
+    },
+    { rootMargin: "-35% 0px -60% 0px" },
+  );
+  for (const target of spyTargets) spy.observe(target);
+}
+
+const preferredTheme = localStorage.getItem("site-theme") || "dark";
 const preferredLanguage = localStorage.getItem("site-language") || "zh";
 
 applyLanguage(preferredLanguage);
