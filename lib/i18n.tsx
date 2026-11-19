@@ -1,4 +1,12 @@
-const translations = {
+"use client";
+
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+
+export type Lang = "zh" | "en";
+export type Theme = "dark" | "light";
+
+export const translations = {
   zh: {
     skip: "跳到正文",
     name: "辰小右",
@@ -85,7 +93,7 @@ const translations = {
     footerCta: "有想法，聊聊看。",
     footerSub: "邮件通常当天回复，也可以在 GitHub 上找到我。",
     footerEmailCta: "发邮件给我",
-    footerBuilt: " · 用 Astro 构建",
+    footerBuilt: " · 用 Next.js 构建",
     profileAlt: "辰小右头像",
     themeDark: "暗",
     themeLight: "亮",
@@ -176,131 +184,68 @@ const translations = {
     footerCta: "Have an idea? Let's talk.",
     footerSub: "Emails usually get a same-day reply — or find me on GitHub.",
     footerEmailCta: "Email me",
-    footerBuilt: " · Built with Astro",
+    footerBuilt: " · Built with Next.js",
     profileAlt: "Chen Xiaoyou profile photo",
     themeDark: "Dark",
     themeLight: "Light",
   },
+} as const;
+
+export type TranslationKey = keyof (typeof translations)["zh"];
+
+type SiteContextValue = {
+  lang: Lang;
+  theme: Theme;
+  t: (key: TranslationKey) => string;
+  toggleLang: () => void;
+  toggleTheme: () => void;
 };
 
-const root = document.documentElement;
-const langButton = document.querySelector("[data-lang-toggle]");
-const themeButton = document.querySelector("[data-theme-toggle]");
-const detailToggles = document.querySelectorAll("[data-detail-toggle]");
-const navLinks = document.querySelectorAll("[data-nav]");
+const SiteContext = createContext<SiteContextValue | null>(null);
 
-function applyLanguage(lang) {
-  const dictionary = translations[lang] || translations.zh;
-  root.lang = lang === "zh" ? "zh-CN" : "en";
-  root.dataset.lang = lang;
-  for (const element of document.querySelectorAll("[data-i18n]")) {
-    const key = element.dataset.i18n;
-    if (dictionary[key]) element.textContent = dictionary[key];
-  }
-  for (const element of document.querySelectorAll("[data-i18n-alt]")) {
-    const key = element.dataset.i18nAlt;
-    if (dictionary[key]) element.setAttribute("alt", dictionary[key]);
-  }
-  for (const element of document.querySelectorAll("[data-i18n-label]")) {
-    const key = element.dataset.i18nLabel;
-    if (dictionary[key]) element.setAttribute("aria-label", dictionary[key]);
-  }
-  for (const element of document.querySelectorAll("[data-i18n-title]")) {
-    const key = element.dataset.i18nTitle;
-    if (dictionary[key]) element.setAttribute("title", dictionary[key]);
-  }
-  for (const element of document.querySelectorAll("[data-i18n-skill]")) {
-    const key = element.dataset.i18nSkill;
-    if (dictionary[key]) element.dataset.skill = dictionary[key];
-  }
-  if (langButton) {
-    langButton.textContent = dictionary.currentLanguageLabel;
-    langButton.classList.toggle("is-active", lang === "en");
-  }
-  localStorage.setItem("site-language", lang);
-}
+export function SiteProvider({ children }: { children: ReactNode }) {
+  const [lang, setLang] = useState<Lang>("zh");
+  const [theme, setTheme] = useState<Theme>("dark");
 
-function applyTheme(theme) {
-  root.dataset.theme = theme;
-  const lang = root.dataset.lang || "zh";
-  const dictionary = translations[lang] || translations.zh;
-  if (themeButton) {
-    const label = theme === "dark" ? dictionary.themeLight : dictionary.themeDark;
-    themeButton.setAttribute("aria-label", label);
-    themeButton.setAttribute("title", label);
-    themeButton.classList.toggle("is-dark", theme === "dark");
-  }
-  localStorage.setItem("site-theme", theme);
-}
+  useEffect(() => {
+    try {
+      const storedLang = localStorage.getItem("site-language");
+      if (storedLang === "zh" || storedLang === "en") setLang(storedLang);
+      const storedTheme = localStorage.getItem("site-theme");
+      if (storedTheme === "dark" || storedTheme === "light") setTheme(storedTheme);
+    } catch {}
+  }, []);
 
-if (langButton) {
-  langButton.addEventListener("click", () => {
-    const nextLang = root.dataset.lang === "zh" ? "en" : "zh";
-    applyLanguage(nextLang);
-    applyTheme(root.dataset.theme || "dark");
-  });
-}
+  useEffect(() => {
+    const root = document.documentElement;
+    root.lang = lang === "zh" ? "zh-CN" : "en";
+    root.dataset.lang = lang;
+    try {
+      localStorage.setItem("site-language", lang);
+    } catch {}
+  }, [lang]);
 
-if (themeButton) {
-  themeButton.addEventListener("click", () => {
-    applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
-  });
-}
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("site-theme", theme);
+    } catch {}
+  }, [theme]);
 
-for (const toggle of detailToggles) {
-  toggle.addEventListener("click", () => {
-    const detail = document.getElementById(toggle.dataset.detailToggle);
-    if (!detail) return;
-    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!isExpanded));
-    toggle.classList.toggle("is-expanded", !isExpanded);
-    toggle.closest(".timeline-item")?.classList.toggle("is-expanded", !isExpanded);
-    detail.hidden = isExpanded;
-  });
-}
+  const toggleLang = useCallback(() => setLang((value) => (value === "zh" ? "en" : "zh")), []);
+  const toggleTheme = useCallback(() => setTheme((value) => (value === "dark" ? "light" : "dark")), []);
 
-// 滚动进入动画：尊重系统减少动态偏好，无 JS 环境下由 CSS 兜底显示
-const revealItems = document.querySelectorAll("[data-reveal]");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (!reduceMotion && "IntersectionObserver" in window && root.classList.contains("js")) {
-  const revealer = new IntersectionObserver(
-    (entries, observer) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+  const t = useCallback((key: TranslationKey) => translations[lang][key], [lang]);
+
+  return (
+    <SiteContext.Provider value={{ lang, theme, t, toggleLang, toggleTheme }}>
+      {children}
+    </SiteContext.Provider>
   );
-  for (const item of revealItems) revealer.observe(item);
-} else {
-  for (const item of revealItems) item.classList.add("is-visible");
 }
 
-// 导航 scrollspy：当前章节对应的锚点高亮
-const spyTargets = [...navLinks]
-  .map((link) => link.dataset.nav)
-  .filter(Boolean)
-  .map((id) => document.getElementById(id))
-  .filter(Boolean);
-if ("IntersectionObserver" in window && spyTargets.length) {
-  const spy = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        for (const link of navLinks) {
-          link.classList.toggle("is-active", link.dataset.nav === entry.target.id);
-        }
-      }
-    },
-    { rootMargin: "-35% 0px -60% 0px" },
-  );
-  for (const target of spyTargets) spy.observe(target);
+export function useSite(): SiteContextValue {
+  const context = useContext(SiteContext);
+  if (!context) throw new Error("useSite must be used within SiteProvider");
+  return context;
 }
-
-const preferredTheme = localStorage.getItem("site-theme") || "dark";
-const preferredLanguage = localStorage.getItem("site-language") || "zh";
-
-applyLanguage(preferredLanguage);
-applyTheme(preferredTheme);
