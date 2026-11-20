@@ -1,7 +1,8 @@
 import Hero from "@/components/Hero";
+import Work from "@/components/Work";
+import Stack from "@/components/Stack";
 import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
+import Pipeline from "@/components/Pipeline";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function HomePage() {
@@ -9,9 +10,10 @@ export default function HomePage() {
     <>
       <main id="top">
         <Hero />
+        <Work />
+        <Stack />
         <About />
-        <Experience />
-        <Projects />
+        <Pipeline />
       </main>
       <SiteFooter />
     </>

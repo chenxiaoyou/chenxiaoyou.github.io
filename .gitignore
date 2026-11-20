@@ -3,5 +3,7 @@ node_modules/
 out/
 .astro/
 .zcode/
+.taste-skill/
+shots/
 tsconfig.tsbuildinfo
 next-env.d.ts
