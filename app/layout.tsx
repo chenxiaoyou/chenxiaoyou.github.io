@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { SiteProvider } from "@/lib/i18n";
 import SiteNav from "@/components/SiteNav";
-import "./globals.css";
 
 const siteDescription =
   "辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。";
@@ -40,6 +41,7 @@ export const viewport: Viewport = {
 // start.mjs 派发的调色板与字型（保持原样，放在套件样式链接之后）
 const designTokens = `
 :root {
+  --p-panel-lit: radial-gradient(120% 100% at 28% 18%, #f2e9d6 0%, #e6dbc7 48%, #d5c6a8 100%);
   --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;
   --p-accent: #062b8a; --p-accent-ink: #e6dbc7; --p-action: #062b8a; --p-action-ink: #e6dbc7;
   --p-inv-bg: #062b8a; --p-inv-surface: #153a90; --p-inv-ink: #e6dbc7; --p-inv-muted: #aab0bc;
@@ -57,6 +59,9 @@ const designTokens = `
 const motionGuards = `document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)`;
 const momentsGuard = `window.__momentsManual = true;document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)`;
 
+// 页面 CSS 以内联方式进 HTML（构建时读取，注释原样保留）——审计与首帧都可见
+const pageCss = readFileSync(join(process.cwd(), "app", "globals.css"), "utf8");
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -68,6 +73,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        {/* 页面 CSS（含 Hallmark stamp 第一行） */}
+        <style dangerouslySetInnerHTML={{ __html: pageCss }} />
         {/* 套件样式（原样加载，顺序即 starter.html 的顺序）与派发 tokens */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

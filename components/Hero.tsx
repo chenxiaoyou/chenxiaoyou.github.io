@@ -10,7 +10,6 @@ export default function Hero() {
       <div className="wrap">
         <div className="hero-text grid hero__grid">
           <div className="hero__text span-5">
-            <p className="hero__kicker"><span className="dot" aria-hidden="true"></span>{t("kicker")}</p>
             <h1 id="hero-h">{t("h1")}</h1>
             <p className="hero__lead">{t("lead")}</p>
             <div className="btn-row">

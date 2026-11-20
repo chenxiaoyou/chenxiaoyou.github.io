@@ -39,6 +39,9 @@ export default function About() {
           <strong>{t("aboutStatementStrong")}</strong>
           {t("aboutStatementPost")}
         </p>
+        <p className="about-copy">
+          {t("aboutCopy")}
+        </p>
         <div className="about-exp">
           <p className="t-label">{t("aboutLabel")}</p>
           <ul className="rows">

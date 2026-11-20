@@ -31,7 +31,7 @@ export default function SiteFooter() {
               <h3>{t("footerColWork")}</h3>
               <ul>
                 <li><a href="#work">{t("workH")}</a></li>
-                <li><a href="#stack">{t("stackH")}</a></li>
+                <li><a href="#pipeline">{t("navPipeline")}</a></li>
               </ul>
             </div>
             <div className="span-2 footer__col">

@@ -24,7 +24,6 @@ const i18n = readRequired("lib/i18n.tsx");
 const siteNav = readRequired("components/SiteNav.tsx");
 const hero = readRequired("components/Hero.tsx");
 const work = readRequired("components/Work.tsx");
-const stack = readRequired("components/Stack.tsx");
 const about = readRequired("components/About.tsx");
 const pipeline = readRequired("components/Pipeline.tsx");
 const footer = readRequired("components/SiteFooter.tsx");
@@ -76,9 +75,10 @@ expect(layout.includes("--ly-scale: 0.98"), "layout should keep the dealt ly-sca
 expect(layout.includes("/assets/system.css"), "layout should load the kit stylesheet");
 
 // 组件与结构
-for (const section of ["Hero", "Work", "Stack", "About", "Pipeline", "SiteFooter"]) {
+for (const section of ["Hero", "Work", "About", "Pipeline", "SiteFooter"]) {
   expect(page.includes(section), `homepage should compose the ${section} section`);
 }
+expect(!page.includes("Stack"), "the tool wall should stay cut (five screens total)");
 expect(!page.includes("ActionBar"), "the optional action bar should stay off a service page");
 expect(siteNav.includes("nav--centre"), "navigation should use the re-dealt nav-centre");
 expect(siteNav.includes("nav__toggle"), "navigation should keep the phone menu toggle");
@@ -94,10 +94,6 @@ expect(work.includes("api_auto_test"), "work should include api_auto_test");
 expect(work.includes("github.com/chenxiaoyou/api_auto_test"), "api_auto_test card should link its repository");
 expect(work.includes("/assets/icons/${id}.svg"), "work cards should load real colour tool icons");
 expect(work.includes('id: "python"') || work.includes("ToolIcon id=\"python\""), "work should name real tools for icons");
-
-expect(stack.includes("ic-40"), "stack should render real colour icons at tile size");
-expect(stack.includes("toolPytest"), "stack should keep pytest as a type tile");
-expect(stack.includes("ic-ink"), "black marks like GitHub should carry ic-ink");
 
 expect(about.includes("data-moment=\"word-highlight\""), "about should host the dealt word-highlight moment");
 expect(about.includes("mo-wh__text"), "about should carry the statement text");
@@ -123,7 +119,7 @@ expect(i18n.includes("test development engineer"), "i18n should name the categor
 expect(!i18n.includes("dockBlogs"), "i18n should not carry removed blog keys");
 
 // css
-expect(css.includes("#stack .tools"), "page CSS should lay out the tools grid");
+expect(css.includes(".work-chip"), "page CSS should style the work chips");
 expect(css.includes(".nav__lang"), "page CSS should style the language control");
 expect(!css.includes("--p-bg"), "page CSS should not re-deal the palette tokens");
 

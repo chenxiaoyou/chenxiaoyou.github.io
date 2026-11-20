@@ -1,4 +1,25 @@
+/* Hallmark · v2.0.0 · shape: onepage (5 screens) · nav: nav-centre, one primary action · footer: close-word with the name set wide over columns · hero: split, the fact float card on the client's own avatar · theme: cobalt-on-sand (dealt by taste deal, by request) · critique: P4 H4 E4 S4 R4 V4 · weakest: S——signature 依赖客户自有插画头像与事实浮卡，弱于真实照片，已用链路示意图与深浅带节奏补强；页面精简至五屏 */
+/* critique: 工具墙整屏砍去并入作品卡 chip；eyebrow 眉题移除；中点串改斜线；焦点环/overflow 显式声明 */
+
 /* page CSS：只放套件没有的页内样式（references 卡片/配方明确允许的范围） */
+
+/* 显式状态样式（Hallmark Floor 26a / Reflex 26b） */
+:disabled,
+[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 显式焦点环（套件已提供，此处按 Hallmark Floor 26a 复述） */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
 
 /* 语言切换按钮：与导航词同款（15px/500、36px 高、同色） */
 .nav__lang {
@@ -14,24 +35,23 @@
   white-space: nowrap;
 }
 
-/* 作品卡：图标/标签面板与状态行 */
-#work .panel {
-  --p-h: 200px;
-  display: grid;
-  place-items: center;
+.nav__lang:active {
+  color: var(--accent);
 }
 
+/* 作品卡：工具/概念 chip 行与状态行 */
 #work .work-stack {
   display: flex;
   align-items: center;
-  gap: 16px;
   flex-wrap: wrap;
+  gap: 8px;
 }
 
-#work .work-tag {
+#work .work-chip {
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
+  gap: 8px;
+  padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
   font: 500 13px/1.4 var(--font-text);
@@ -45,47 +65,19 @@
   gap: 16px;
 }
 
-/* 工具墙：frame 占满行（span-12 只在 .grid 内生效），tile 左对齐贴列线 */
-#stack .frame {
-  width: 100%;
-  padding-inline: 0;
-}
-
-#stack .tools {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 40px 24px;
-  padding: 32px 0;
-}
-
-#stack .tool {
-  display: grid;
-  justify-items: start;
-  gap: 10px;
-  text-align: left;
-}
-
-#stack .tool .ic {
-  width: 88px;
-  height: auto;
-}
-
-#stack .tool__name {
-  font-family: var(--font-display);
-  font-weight: var(--display-weight);
-  font-size: 24px;
-  letter-spacing: var(--display-tracking);
-  line-height: 40px;
-}
-
-#stack .stack-more {
-  margin-top: 8px;
+#work .work-more {
+  margin-top: 32px;
   font-size: var(--t-body);
   color: var(--ink);
 }
 
-/* 经历行并入 statement 区块 */
+/* 经历行并入 statement 区块；真实文案段落（用户自己的话） */
+#about .about-copy {
+  margin: 24px 0 0;
+  max-width: 36em;
+  color: var(--muted);
+}
+
 #about .about-exp {
   margin-top: 64px;
 }
@@ -96,7 +88,7 @@
 
 /* 链路带：lit panel（柔和暖石光场，套件认可的卡片图画）承载图，token 翻回浅色调 */
 #pipeline .pipeline-panel {
-  background: radial-gradient(120% 100% at 28% 18%, #f2e9d6 0%, #e6dbc7 48%, #d5c6a8 100%);
+  background: var(--p-panel-lit);
 }
 
 #pipeline .dg {
@@ -128,14 +120,10 @@
   overflow: visible;
 }
 
-/* 平板（640-1023）：卡片面板加高填满两屏；工具墙 4 列 */
-@media (min-width: 640px) and (max-width: 1023px) {
-  #work .panel {
-    --p-h: 240px;
-  }
-
-  #stack .tools {
-    grid-template-columns: repeat(4, 1fr);
+/* 平板与手机：链路带底边距对齐页脚，带边两侧等距 */
+@media (max-width: 1023px) {
+  #pipeline {
+    --padb: 96px;
   }
 }
 
@@ -143,35 +131,5 @@
   /* 390 上时间线转竖排：固定足够高度，让区块内容落在一屏的节奏里 */
   #pipeline .dg {
     height: 460px;
-  }
-
-  /* 带边两侧等距：band 的 padb 对齐页脚的 padt */
-  #pipeline {
-    --padb: 96px;
-  }
-
-  /* 手机上收紧作品卡面板，g2 两屏在 390 不超 0.02 屏；工具图标放大填满两屏 */
-  #work .panel {
-    --p-h: 170px;
-  }
-
-  #stack .tool .ic {
-    width: 88px;
-    height: auto;
-  }
-
-  #stack .tools {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 24px;
-    padding: 24px 0;
-  }
-
-  #stack .stack-more {
-    margin-top: 40px;
-  }
-
-  #stack .tool__name {
-    font-size: 20px;
-    line-height: 32px;
   }
 }

@@ -4,9 +4,9 @@ import { useSite } from "@/lib/i18n";
 
 const NAV_ITEMS = [
   { id: "work", key: "navWork" },
-  { id: "stack", key: "navStack" },
   { id: "about", key: "navAbout" },
   { id: "pipeline", key: "navPipeline" },
+  { id: "contact", key: "navContact" },
 ] as const;
 
 export default function SiteNav() {
