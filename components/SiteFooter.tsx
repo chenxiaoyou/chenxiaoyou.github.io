@@ -6,65 +6,35 @@ export default function SiteFooter() {
   const { t } = useSite();
 
   return (
-    <footer className="footer closing" id="contact" aria-labelledby="close-h">
-      <div className="wrap">
-        <div className="closing__cta close--word">
-          <div className="section-head--split">
-            <div>
-              <h2 id="close-h">{t("closeH")}</h2>
-              <p className="t-lead">{t("closeLine")}</p>
-            </div>
-            <a className="btn btn--primary" href="mailto:chenxiaoyou19@gmail.com">
-              {t("ctaEmail")}
-              <svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path className="m-arrow__stem" d="M1 6h8"/><path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
-            </a>
-          </div>
-          <p className="close__word" aria-hidden="true">{t("name")}</p>
+    <footer className="footer" id="contact" aria-labelledby="close-h">
+      <div className="container">
+        <div className="footer__close">
+          <h2 id="close-h">{t("closeH")}</h2>
+          <p>{t("closeLine")}</p>
         </div>
-        <div className="closing__links">
-          <div className="grid">
-            <div className="span-4 stack-4">
-              <a className="nav__logo" href="#top">{t("name")}</a>
-              <p className="footer__lede">{t("footerLede")}</p>
-            </div>
-            <div className="span-2 footer__col">
-              <h3>{t("footerColWork")}</h3>
-              <ul>
-                <li><a href="#work">{t("workH")}</a></li>
-                <li><a href="#pipeline">{t("navPipeline")}</a></li>
-              </ul>
-            </div>
-            <div className="span-2 footer__col">
-              <h3>{t("footerColMethod")}</h3>
-              <ul>
-                <li><a href="#pipeline">{t("navPipeline")}</a></li>
-                <li><a href="#about">{t("navAbout")}</a></li>
-              </ul>
-            </div>
-            <div className="span-2 footer__col">
-              <h3>{t("footerColReach")}</h3>
-              <ul>
-                <li><a href="mailto:chenxiaoyou19@gmail.com">{t("ctaEmail")}</a></li>
-                <li><a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer">{t("footerGithub")}</a></li>
-                <li><a href="/assets/resume.pdf" download>{t("ctaResume")}</a></li>
-              </ul>
-            </div>
-            <div className="span-2 footer__col">
-              <h3>{t("footerColNav")}</h3>
-              <ul>
-                <li><a href="#top">{t("footerTop")}</a></li>
-                <li><a href="#work">{t("navWork")}</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer__legal">
-            <span>&copy; 2026 {t("name")}</span>
-            <span className="t-small muted">{t("footerLegal")}</span>
-            <div className="socials">
-              <a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg className="ic ic-20" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              </a>
-            </div>
+        <a className="footer__mail" href="mailto:chenxiaoyou19@gmail.com">chenxiaoyou19@gmail.com</a>
+        <ul className="footer__links">
+          <li>
+            <a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </li>
+          <li>
+            <a href="/assets/resume.pdf" download>{t("ctaResume")}</a>
+          </li>
+          <li>
+            <a href="#top">{t("footerTop")}</a>
+          </li>
+        </ul>
+        <div className="footer__seal-row" aria-hidden="true">
+          <span className="seal">辰</span>
+          <span className="close__word">{t("name")}</span>
+        </div>
+        <div className="footer__legal">
+          <span>&copy; 2026 {t("name")}</span>
+          <span>{t("footerLegal")}</span>
+          <div className="socials">
+            <a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg className="ic ic-20" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
           </div>
         </div>
       </div>

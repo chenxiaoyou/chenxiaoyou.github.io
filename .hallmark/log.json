@@ -1,0 +1,29 @@
+[
+ {
+  "shape": "acceptance report onepage",
+  "theme": "custom",
+  "genre": "modern-minimal",
+  "job": "hire",
+  "idea": "这份主页本身就是他交付的一份验收报告：每个区块都是一项可核验的验收项，状态全部真实",
+  "vibe": "精确、克制的深色工程文档，一枚朱砂印",
+  "hero": "report header: doc meta row, the craft promise as the headline, vermillion mail action, the four-工序 acceptance rail as the signature",
+  "nav": "one line: wordmark + four words + plain mail action",
+  "footer": "contact details end, the name set wide, legal row",
+  "imagery": "type and colour carry the page; the client's avatar is the one grayscale specimen",
+  "photos": [],
+  "entry": "v1.4.0 hallmark custom redesign: dark vermillion acceptance report, 5 screens, full-mono material",
+  "fingerprint": "report-header/rail-ledger/statement/pipeline-band/mail-close",
+  "sections": "hero, work index, about statement+rows, pipeline band, footer",
+  "signature": "the four-工序 acceptance rail with real statuses",
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "waived": [
+   "24a kit diagram.css/icon.css spacing",
+   "48 kit colour literals",
+   "75 mono material subs 13px"
+  ],
+  "prompt": "太丑了 → hallmark 全权定制重设计",
+  "date": "2026-11-21"
+ }
+]

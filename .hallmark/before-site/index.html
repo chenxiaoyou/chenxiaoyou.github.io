@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="zh-CN" data-type="service" data-radius="soft" data-buttons="tonal" data-motion="true"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" as="image" href="/assets/profile.png" fetchPriority="high"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/1r8o32q13stub.js"/><script src="/_next/static/chunks/0dia8bfp_fmb0.js" async=""></script><script src="/_next/static/chunks/3lbm-r_1xmrrq.js" async=""></script><script src="/_next/static/chunks/turbopack-2u1d16houkiyo.js" async=""></script><script src="/_next/static/chunks/16nf6foom9oqo.js" async=""></script><script src="/_next/static/chunks/1xs9_i53uqzl_.js" async=""></script><link rel="preload" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&amp;display=swap" as="style"/><link rel="preload" href="/assets/system.css" as="style"/><link rel="preload" href="/assets/ui/cards.css" as="style"/><link rel="preload" href="/assets/motion/motion.css" as="style"/><link rel="preload" href="/assets/layout/layout.css" as="style"/><link rel="preload" href="/assets/icons/icon.css" as="style"/><link rel="preload" href="/assets/diagrams/diagram.css" as="style"/><link rel="modulepreload" href="/assets/moments/moments.js"/><link rel="modulepreload" href="/assets/moments/lib.js"/><link rel="modulepreload" href="/assets/moments/word-highlight/moment.js"/><link rel="preload" href="/assets/system.js" as="script"/><link rel="preload" href="/assets/motion/motion.js" as="script"/><link rel="preload" href="/assets/layout/layout.js" as="script"/><link rel="preload" href="/assets/diagrams/mount.js" as="script"/><link rel="preload" href="/assets/moments/moments.js" as="script"/><meta name="theme-color" content="#e6dbc7"/><title>辰小右：测试开发工程师的个人主页</title><meta name="description" content="辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。"/><meta name="site-kind" content="other"/><meta name="page-type" content="service"/><link rel="canonical" href="https://chenxiaoyou.github.io"/><meta property="og:title" content="辰小右：测试开发工程师的个人主页"/><meta property="og:description" content="辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。"/><meta property="og:url" content="https://chenxiaoyou.github.io"/><meta property="og:image" content="https://chenxiaoyou.github.io/share.jpg"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="辰小右：测试开发工程师的个人主页"/><meta name="twitter:description" content="辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。"/><meta name="twitter:image" content="https://chenxiaoyou.github.io/share.jpg"/><link rel="icon" href="/assets/profile.png"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="modulepreload" href="/assets/moments/moments.js"/><link rel="modulepreload" href="/assets/moments/lib.js"/><link rel="modulepreload" href="/assets/moments/word-highlight/moment.js"/><script src="/_next/static/chunks/0cz1d0mv5g_q7.js" noModule=""></script></head><body><div hidden=""><!--$--><!--/$--></div><style>/* Hallmark · v2.0.0 · shape: onepage (5 screens) · nav: nav-centre, one primary action · footer: close-word with the name set wide over columns · hero: split, the fact float card on the client's own avatar · theme: cobalt-on-sand (dealt by taste deal, by request) · critique: P4 H4 E4 S4 R4 V4 · weakest: S——signature 依赖客户自有插画头像与事实浮卡，弱于真实照片，已用链路示意图与深浅带节奏补强；页面精简至五屏 */
+/* critique: 工具墙整屏砍去并入作品卡 chip；eyebrow 眉题移除；中点串改斜线；焦点环/overflow 显式声明 */
+
+/* page CSS：只放套件没有的页内样式（references 卡片/配方明确允许的范围） */
+
+/* 显式状态样式（Hallmark Floor 26a / Reflex 26b） */
+:disabled,
+[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 显式焦点环（套件已提供，此处按 Hallmark Floor 26a 复述） */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+/* 语言切换按钮：与导航词同款（15px/500、36px 高、同色） */
+.nav__lang {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0 16px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font: 500 15px/36px var(--font-text);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.nav__lang:active {
+  color: var(--accent);
+}
+
+/* 作品卡：工具/概念 chip 行与状态行 */
+#work .work-stack {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#work .work-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: 500 13px/1.4 var(--font-text);
+  color: var(--ink);
+}
+
+#work .work-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+#work .work-more {
+  margin-top: 32px;
+  font-size: var(--t-body);
+  color: var(--ink);
+}
+
+/* 经历行并入 statement 区块；真实文案段落（用户自己的话） */
+#about .about-copy {
+  margin: 24px 0 0;
+  max-width: 36em;
+  color: var(--muted);
+}
+
+#about .about-exp {
+  margin-top: 64px;
+}
+
+#about .about-exp .rows {
+  margin-top: 24px;
+}
+
+/* 链路带：lit panel（柔和暖石光场，套件认可的卡片图画）承载图，token 翻回浅色调 */
+#pipeline .pipeline-panel {
+  background: var(--p-panel-lit);
+}
+
+#pipeline .dg {
+  --dg-ink: var(--p-ink);
+  --dg-muted: var(--p-ink);
+  --dg-accent: var(--p-accent);
+  --dg-accent-ink: var(--p-accent-ink);
+}
+
+#pipeline .dg-cap__s {
+  font-size: 13px;
+}
+
+#pipeline .dg-node.is-hit {
+  border-color: var(--dg-border);
+  box-shadow: none;
+}
+
+/* 页脚 legal 行：左对齐落在列线上 */
+.footer__legal {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+/* close 名字行：套件按拉丁字标设计（line-height .86 + overflow clip），CJK 字形上沿被裁，放开 */
+#contact .close__word {
+  line-height: 1;
+  overflow: visible;
+}
+
+/* 平板与手机：链路带底边距对齐页脚，带边两侧等距 */
+@media (max-width: 1023px) {
+  #pipeline {
+    --padb: 96px;
+  }
+}
+
+@media (max-width: 639px) {
+  /* 390 上时间线转竖排：固定足够高度，让区块内容落在一屏的节奏里 */
+  #pipeline .dg {
+    height: 460px;
+  }
+}
+</style><link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&amp;display=swap" rel="stylesheet"/><link rel="stylesheet" href="/assets/system.css"/><link rel="stylesheet" href="/assets/ui/cards.css"/><link rel="stylesheet" href="/assets/motion/motion.css"/><link rel="stylesheet" href="/assets/layout/layout.css"/><link rel="stylesheet" href="/assets/icons/icon.css"/><link rel="stylesheet" href="/assets/diagrams/diagram.css"/><style>
+:root {
+  --p-panel-lit: radial-gradient(120% 100% at 28% 18%, #f2e9d6 0%, #e6dbc7 48%, #d5c6a8 100%);
+  --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;
+  --p-accent: #062b8a; --p-accent-ink: #e6dbc7; --p-action: #062b8a; --p-action-ink: #e6dbc7;
+  --p-inv-bg: #062b8a; --p-inv-surface: #153a90; --p-inv-ink: #e6dbc7; --p-inv-muted: #aab0bc;
+  --p-inv-accent: #e6dbc7; --p-inv-accent-ink: #062b8a; --p-inv-action: #e6dbc7; --p-inv-action-ink: #062b8a;
+  --font-display: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-text: "Schibsted Grotesk", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.042em;
+  --ly-scale: 0.98;
+}
+</style><script>(self.__next_s=self.__next_s||[]).push([0,{"children":"document.documentElement.classList.add('m-enter');setTimeout(()=\u003edocument.documentElement.classList.add('m-enter-done'),700)","id":"m-enter-guard"}])</script><script>(self.__next_s=self.__next_s||[]).push([0,{"children":"window.__momentsManual = true;document.documentElement.classList.add('mo-js');setTimeout(()=\u003edocument.documentElement.classList.add('mo-safe'),2500)","id":"moments-guard"}])</script><header class="nav nav--centre"><div class="wrap nav__bar"><a class="skip-link" href="#top">跳到正文</a><a class="nav__logo" href="#top">辰小右</a><nav class="nav__links" aria-label="Main"><div class="nav__item"><a class="nav__link" href="#work">作品</a></div><div class="nav__item"><a class="nav__link" href="#about">经历</a></div><div class="nav__item"><a class="nav__link" href="#pipeline">链路</a></div><div class="nav__item"><a class="nav__link" href="#contact">联系</a></div></nav><div class="nav__actions"><button class="nav__lang" type="button" aria-label="Switch language / 切换语言">EN</button><a class="btn btn--primary" href="mailto:chenxiaoyou19@gmail.com">发邮件给我</a></div><button class="nav__toggle" type="button" aria-expanded="false" aria-label="菜单"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button></div></header><main id="top"><section class="hero hero--split" data-enter="true" aria-labelledby="hero-h"><div class="wrap"><div class="hero-text grid hero__grid"><div class="hero__text span-5"><h1 id="hero-h">辰小右 · 测试开发工程师</h1><p class="hero__lead">我为业务团队搭自动化回归、CI 质量门禁和稳定性巡检，把质量风险拦在发布前。</p><div class="btn-row"><a class="btn btn--primary" href="mailto:chenxiaoyou19@gmail.com">发邮件给我</a><a class="btn btn--secondary" href="/assets/resume.pdf" download="">下载简历</a></div></div><div class="hero__media span-6 start-7"><img src="/assets/profile.png" alt="辰小右的头像" style="--ly-pos:50% 40%" fetchPriority="high"/><div class="ly-float"><div class="ly-float__row"><span class="ly-live">在职</span><span>2021.06 至今</span></div><div class="ly-float__title">字节跳动 · 测试开发工程师</div></div></div></div></div></section><section class="section" id="work" aria-labelledby="work-h"><div class="wrap"><div class="section-head"><h2 id="work-h">作品与在建</h2><p>四个方向，从接口回归做到 Agent 评测。</p></div><div class="grid"><article class="card card--row card--open span-6"><h3>api_auto_test</h3><p>自建接口自动化回归框架，pytest 分层与数据驱动设计。<!-- --> <!-- -->Allure 报告与 Jenkins 调度一体化。</p><div class="work-stack"><span class="work-chip"><img class="ic ic-24" src="/assets/icons/python.svg" alt="" width="24" height="24" loading="lazy"/>Pytest</span><span class="work-chip"><img class="ic ic-24" src="/assets/icons/jenkins.svg" alt="" width="24" height="24" loading="lazy"/>Allure</span></div><div class="work-foot"><span class="t-label muted">建设中</span><a class="link" href="https://github.com/chenxiaoyou/api_auto_test" target="_blank" rel="noopener noreferrer">查看仓库</a></div></article><article class="card card--row card--open span-6"><h3>mewcode 源码拆解</h3><p>从源码拆解 Coding Agent 的核心机制。<!-- --> <!-- -->agent loop、工具调用与权限、记忆与多智能体协作，逐个拆开看。</p><div class="work-stack"><span class="work-chip">Agent Loop</span><span class="work-chip">Tools</span><span class="work-chip">Memory</span></div><div class="work-foot"><span class="t-label muted">学习中</span></div></article><article class="card card--row card--open span-6"><h3>mewhelp 源码拆解</h3><p>拆解 RAG 知识库助手的全链路。<!-- --> <!-- -->知识库构建、检索增强生成，用 Langfuse 看住每一次检索。</p><div class="work-stack"><span class="work-chip"><img class="ic ic-24" src="/assets/icons/langfuse.svg" alt="" width="24" height="24" loading="lazy"/>检索</span><span class="work-chip">RAG</span></div><div class="work-foot"><span class="t-label muted">学习中</span></div></article><article class="card card--row card--open span-6"><h3>AI 评测实践</h3><p>用测试开发的方法评测 Agent。<!-- --> <!-- -->先建评测集和指标体系，再谈 LLM-as-judge 与效果回归。</p><div class="work-stack"><span class="work-chip">评测集</span><span class="work-chip">指标体系</span><span class="work-chip">LLM-as-judge</span></div><div class="work-foot"><span class="t-label muted">规划中</span></div></article></div><p class="work-more">完整清单在简历里。<!-- --> <a class="link" href="/assets/resume.pdf" download="">下载简历</a></p></div></section><section class="section statement" id="about" data-moment="word-highlight" aria-labelledby="about-h"><div class="wrap"><h2 id="about-h">质量工程这件事</h2><p class="mo-wh__text">回归、门禁、巡检、复盘，是 <strong>一条链路</strong> 上的四道工序。 少任何一道， 风险 都会 在发布当天 集中爆发。</p><p class="about-copy">五年多互联网测试开发经验，主攻泛自动化建设与稳定性建设：从自动化用例与框架、CI 质量门禁，到稳定性巡检与故障复盘，把质量工程沉淀为可复用的体系。当前正系统深入 AI Agent 与 AI 评测（mewcode / mewhelp），探索质量工程的下一站。</p><div class="about-exp"><p class="t-label">经历</p><ul class="rows"><li><span class="rows__name">字节跳动<small>测试开发工程师 · 北京</small></span><span class="rows__value">2021.06 至今</span></li><li><span class="rows__name">北京邮电大学<small>硕士 · 电子与通信工程</small></span><span class="rows__value">2018 - 2021</span></li><li><span class="rows__name">南京邮电大学<small>本科 · 信息安全</small></span><span class="rows__value">2012 - 2016</span></li></ul></div></div></section><section class="section ground-inverse" id="pipeline" aria-labelledby="pipeline-h"><div class="wrap"><div class="section-head"><h2 id="pipeline-h">一条质量链路。<!-- --> <span class="muted">从变更到复盘，环环相扣。</span></h2></div><div class="panel pipeline-panel"><div class="dg" data-diagram="" data-icon-base="/assets/icons"><script type="application/json">{"layout":"timeline","ground":"none","motion":{"pulse":"none"},"size":"band","steps":[{"label":"变更提交","sub":"每次合并","icon":"ui:git-commit-horizontal","done":true},{"label":"自动化回归","sub":"Pytest · Playwright","icon":"python","done":true},{"label":"CI 门禁","sub":"合并前拦截","icon":"jenkins","done":true},{"label":"线上巡检","sub":"指标与日志","icon":"grafana","done":true},{"label":"故障复盘","sub":"归档与改进","icon":"ui:clipboard-check","done":true}],"alt":"一条质量链路：变更提交、自动化回归、CI 门禁、线上巡检、故障复盘。"}</script></div></div></div></section></main><footer class="footer closing" id="contact" aria-labelledby="close-h"><div class="wrap"><div class="closing__cta close--word"><div class="section-head--split"><div><h2 id="close-h">聊质量工程，写邮件最快</h2><p class="t-lead">邮件通常当天回复。</p></div><a class="btn btn--primary" href="mailto:chenxiaoyou19@gmail.com">发邮件给我<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"></path></svg></a></div><p class="close__word" aria-hidden="true">辰小右</p></div><div class="closing__links"><div class="grid"><div class="span-4 stack-4"><a class="nav__logo" href="#top">辰小右</a><p class="footer__lede">测试开发 / 泛自动化 / 稳定性工程</p></div><div class="span-2 footer__col"><h3>作品</h3><ul><li><a href="#work">作品与在建</a></li><li><a href="#pipeline">链路</a></li></ul></div><div class="span-2 footer__col"><h3>方法</h3><ul><li><a href="#pipeline">链路</a></li><li><a href="#about">经历</a></li></ul></div><div class="span-2 footer__col"><h3>联系</h3><ul><li><a href="mailto:chenxiaoyou19@gmail.com">发邮件给我</a></li><li><a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="/assets/resume.pdf" download="">下载简历</a></li></ul></div><div class="span-2 footer__col"><h3>页内</h3><ul><li><a href="#top">回到顶部</a></li><li><a href="#work">作品</a></li></ul></div></div><div class="footer__legal"><span>© 2026 <!-- -->辰小右</span><span class="t-small muted">页面中的产品名称与图标归其各自所有者所有。</span><div class="socials"><a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="ic ic-20" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a></div></div></div></div></footer><!--$--><!--/$--><script id="_R_">(globalThis["TURBOPACK"] || (globalThis["TURBOPACK"] = [])).push({"otherChunks":["static/chunks/1r8o32q13stub.js","static/chunks/0dia8bfp_fmb0.js","static/chunks/3lbm-r_1xmrrq.js"],"runtimeModuleIds":[94553]});</script><script src="/_next/static/chunks/1r8o32q13stub.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n18:\"/_next/static/chunks/16nf6foom9oqo.js\"\n19:I[68027,[\"$18\"],\"default\",1]\n:HL[\"https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700\u0026display=swap\",\"style\"]\n2:Tcff,/* Hallmark · v2.0.0 · shape: onepage (5 screens) · nav: nav-centre, one primary action · footer: close-word with the name set wide over columns · hero: split, the fact float card on the client's own avatar · theme: cobalt-on-sand (dealt by taste deal, by request) · critique: P4 H4 E4 S4 R4 V4 · weakest: S——signature 依赖客户自有插画头像与事实浮卡，弱于真实照片，已用链路示意图与深浅带节奏补强；页面精简至五屏 */\n/* critique: 工具墙整屏砍去并入作品卡 chip；eyebrow 眉题移除；中点串改斜线；焦点环/overflow 显式声明 */\n\n/* page CSS：只放套件没有的页内样式（references 卡片/配方明确允许的范围） */\n\n/* 显式状态样式（Hallmark Floor 26a / Reflex 26b） */\n:disabled,\n[aria-disabled=\"true\"] {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n\n/* 显式焦点环（套件已提供，此处按 Hallmark Floor 26a 复述） */\n:focus-visible {\n  outline: 2px solid var(--accent);\n  outline-offset: 2px;\n}\n\nhtml,\nbody {\n  overflow-x: clip;\n}\n\n/* 语言切换按钮：与导航词同款（15px/500、36px 高、同色） */\n.nav__lang {\n  appearance: none;\n  background: none;\n  border: 0;\n  padding: 0 16px;\n  height: 36px;\n  border-radius: var(--r-sm);\n  cursor: pointer;\n  font: 500 15px/36px var(--font-text);\n  color: var(--ink);\n  white-space: nowrap;\n}\n\n.nav__lang:active {\n  color: var(--accent);\n}\n\n/* 作品卡：工具/概念 chip 行与状态行 */\n#work .work-stack {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n\n#work .work-chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 8px 12px;\n  border: 1px solid var(--line);\n  border-radius: var(--r-sm);\n  font: 500 13px/1.4 var(--font-text);\n  color: var(--ink);\n}\n\n#work .work-foot {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 16px;\n}\n\n#work .work-more {\n  margin-top: 32px;\n  font-size: var(--t-body);\n  color: var(--ink);\n}\n\n/* 经历行并入 statement 区块；真实文案段落（用户自己的话） */\n#about .about-copy {\n  margin: 24px 0 0;\n  max-width: 36em;\n  color: var(--muted);\n}\n\n#about .about-exp {\n  margin-top: 64px;\n}\n\n#about .about-exp .rows {\n  margin-top: 24px;\n}\n\n/* 链路带：lit panel（柔和暖石光场，套件认可的卡片图画）承载图，token 翻回浅色调 */\n#pipeline .pipeline-panel {\n  background: var(--p-panel-lit);\n}\n\n#pipeline .dg {\n  --dg-ink: var(--p-ink);\n  --dg-muted: var(--p-ink);\n  --dg-accent: var(--p-accent);\n  --dg-accent-ink: var(--p-accent-ink);\n}\n\n#pipeline .dg-cap__s {\n  font-size: 13px;\n}\n\n#pipeline .dg-node.is-hit {\n  border-color: var(--dg-border);\n  box-shadow: none;\n}\n\n/* 页脚 legal 行：左对齐落在列线上 */\n.footer__legal {\n  display: grid;\n  gap: 8px;\n  justify-items: start;\n}\n\n/* close 名字行：套件按拉丁字标设计（line-height .86 + overflow clip），CJK 字形上沿被裁，放开 */\n#contact .close__word {\n  line-height: 1;\n  overflow: visible;\n}\n\n/* 平板与手机：链路带底边距对齐页脚，带边两侧等距 */\n@media (max-width: 1023px) {\n  #pipeline {\n    --padb: 96px;\n  }\n}\n\n@media (max-width: 639px) {\n  /* 390 上时间线转竖排：固定足够高度，让区块内容落在一屏的节奏里 */\n  #pipeline .dg {\n    height: 460px;\n  }\n}\n15:[[\"children\",{\"s\":\"__PAGE__\",\"h\":512,\"d\":{\"r\":\"$L16\",\"p\":false,\"v\":null}}]]\n0:{\"P\":null,\"c\":[\"\",\"\"],\"q\":\"\",\"i\":false,\"t\":{\"t\":{\"s\":\"\",\"h\":528,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/16nf6foom9oqo.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh-CN\",\"data-type\":\"service\",\"data-radius\":\"soft\",\"data-buttons\":\"tonal\",\"data-motion\":true,\"suppressHydrationWarning\":true,\"children\":[\"$\",\"body\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"$2\"}}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.googleapis.com\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.gstatic.com\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"link\",null,{\"href\":\"https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700\u0026display=swap\",\"rel\":\"stylesheet\"}],\"$L3\",\"$L4\",\"$L5\",\"$L6\",\"$L7\",\"$L8\",\"$L9\",\"$La\",\"$Lb\",\"$Lc\",\"$Ld\",\"$Le\",\"$Lf\",\"$L10\",\"$L11\",\"$L12\",\"$L13\",\"$L14\"]}]}]]}],\"p\":false,\"v\":null},\"c\":\"$Q15\"},\"h\":{\"r\":\"$L17\",\"p\":false,\"v\":null}},\"m\":\"$undefined\",\"G\":[\"$19\",[]],\"S\":true,\"r\":\"$undefined\",\"s\":\"$undefined\",\"a\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"ATNUw8ryHIwxS3l98d3Kp\"}\n1a:I[79520,[\"$18\"],\"\"]\n1b:I[7761,[\"$18\"],\"SiteProvider\"]\n1c:I[34107,[\"$18\"],\"default\"]\n1d:I[39756,[\"$18\"],\"default\"]\n1e:I[37457,[\"$18\"],\"default\"]\n1f:\"/_next/static/chunks/1xs9_i53uqzl_.js\"\n20:I[92349,[\"$18\",\"$1f\"],\"default\"]\n21:I[48055,[\"$18\",\"$1f\"],\"default\"]\n22:I[79356,[\"$18\",\"$1f\"],\"default\"]\n23:I[17179,[\"$18\",\"$1f\"],\"default\"]\n24:I[30023,[\"$18\",\"$1f\"],\"default\"]\n25:I[97367,[\"$18\"],\"OutletBoundary\"]\n26:\"$Sreact.suspense\"\n28:\"ViewportBoundary\"\n29:I[97367,[\"$18\"],\"$28\"]\n2b:\"MetadataBoundary\"\n2c:I[97367,[\"$18\"],\"$2b\"]\n:HL[\"/assets/system.css\",\"style\"]\n:HL[\"/assets/ui/cards.css\",\"style\"]\n:HL[\"/assets/motion/motion.css\",\"style\"]\n:HL[\"/assets/layout/layout.css\",\"style\"]\n:HL[\"/assets/icons/icon.css\",\"style\"]\n:HL[\"/assets/diagrams/diagram.css\",\"style\"]\n:Hm\"/assets/moments/moments.js\"\n:Hm\"/assets/moments/lib.js\"\n:Hm\"/assets/moments/word-highlight/moment.js\"\n3:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/system.css\"}]\n4:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/ui/cards.css\"}]\n5:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/motion/motion.css\"}]\n6:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/layout/layout.css\"}]\n7:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/icons/icon.css\"}]\n8:[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/diagrams/diagram.css\"}]\n9:[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n:root {\\n  --p-panel-lit: radial-gradient(120% 100% at 28% 18%, #f2e9d6 0%, #e6dbc7 48%, #d5c6a8 100%);\\n  --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;\\n  --p-accent: #062b8a; --p-accent-ink: #e6dbc7; --p-action: #062b8a; --p-action-ink: #e6dbc7;\\n  --p-inv-bg: #062b8a; --p-inv-surface: #153a90; --p-inv-ink: #e6dbc7; --p-inv-muted: #aab0bc;\\n  --p-inv-accent: #e6dbc7; --p-inv-accent-ink: #062b8a; --p-inv-action: #e6dbc7; --p-inv-action-ink: #062b8a;\\n  --font-display: \\\"Schibsted Grotesk\\\", system-ui, sans-serif;\\n  --font-text: \\\"Schibsted Grotesk\\\", system-ui, sans-serif;\\n  --display-weight: 400;\\n  --display-tracking: -0.035em;\\n  --display-tracking-xl: -0.042em;\\n  --ly-scale: 0.98;\\n}\\n\"}}]\na:[\"$\",\"$L1a\",null,{\"id\":\"m-enter-guard\",\"strategy\":\"beforeInteractive\",\"dangerouslySetInnerHTML\":{\"__html\":\"document.documentElement.classList.add('m-enter');setTimeout(()=\u003edocument.documentElement.classList.add('m-enter-done'),700)\"}}]\nb:[\"$\",\"$L1a\",null,{\"id\":\"moments-guard\",\"strategy\":\"beforeInteractive\",\"dangerouslySetInnerHTML\":{\"__html\":\"window.__momentsManual = true;document.documentElement.classList.add('mo-js');setTimeout(()=\u003edocument.documentElement.classList.add('mo-safe'),2500)\"}}]\nc:[\"$\",\"link\",null,{\"rel\":\"modulepreload\",\"href\":\"/assets/moments/moments.js\"}]\nd:[\"$\",\"link\",null,{\"rel\":\"modulepreload\",\"href\":\"/assets/moments/lib.js\"}]\ne:[\"$\",\"link\",null,{\"rel\":\"modulepreload\",\"href\":\"/assets/moments/word-highlight/moment.js\"}]\nf:[\"$\",\"$L1b\",null,{\"children\":[[\"$\",\"$L1c\",null,{}],[\"$\",\"$L1d\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L1e\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n10:[\"$\",\"$L1a\",null,{\"src\":\"/assets/system.js\",\"type\":\"module\",\"strategy\":\"afterInteractive\"}]\n11:[\"$\",\"$L1a\",null,{\"src\":\"/assets/motion/motion.js\",\"type\":\"module\",\"strategy\":\"afterInteractive\"}]\n12:[\"$\",\"$L1a\",null,{\"src\":\"/assets/layout/layout.js\",\"type\":\"module\",\"strategy\":\"afterInteractive\"}]\n13:[\"$\",\"$L1a\",null,{\"src\":\"/assets/diagrams/mount.js\",\"type\":\"module\",\"strategy\":\"afterInteractive\"}]\n14:[\"$\",\"$L1a\",null,{\"src\":\"/assets/moments/moments.js\",\"type\":\"module\",\"strategy\":\"afterInteractive\"}]\n16:[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"main\",null,{\"id\":\"top\",\"children\":[[\"$\",\"$L20\",null,{}],[\"$\",\"$L21\",null,{}],[\"$\",\"$L22\",null,{}],[\"$\",\"$L23\",null,{}]]}],[\"$\",\"$L24\",null,{}]],[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/1xs9_i53uqzl_.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$L25\",null,{\"children\":[\"$\",\"$26\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@27\"}]}]]}]\n17:[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$L29\",null,{\"children\":\"$L2a\"}],[\"$\",\"$L2c\",null,{\"children\":[[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$26\",null,{\"name\":\"Next.Metadata\",\"children\":\"$L2d\"}]}],null]}],null]}]\n2a:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"2\",{\"name\":\"theme-color\",\"content\":\"#e6dbc7\"}]]\n2e:I[27201,[\"$18\"],\"IconMark\"]\n27:null\n2d:[[\"$\",\"title\",\"0\",{\"children\":\"辰小右：测试开发工程师的个人主页\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。\"}],[\"$\",\"meta\",\"2\",{\"name\":\"site-kind\",\"content\":\"other\"}],[\"$\",\"meta\",\"3\",{\"name\":\"page-type\",\"content\":\"service\"}],[\"$\",\"link\",\"4\",{\"rel\":\"canonical\",\"href\":\"https://chenxiaoyou.github.io\"}],[\"$\",\"meta\",\"5\",{\"property\":\"og:title\",\"content\":\"辰小右：测试开发工程师的个人主页\"}],[\"$\",\"meta\",\"6\",{\"property\":\"og:description\",\"content\":\"辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。\"}],[\"$\",\"meta\",\"7\",{\"property\":\"og:url\",\"content\":\"https://chenxiaoyou.github.io\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:image\",\"content\":\"https://chenxiaoyou.github.io/share.jpg\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"10\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"11\",{\"name\":\"twitter:title\",\"content\":\"辰小右：测试开发工程师的个人主页\"}],[\"$\",\"meta\",\"12\",{\"name\":\"twitter:description\",\"content\":\"辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。\"}],[\"$\",\"meta\",\"13\",{\"name\":\"twitter:image\",\"content\":\"https://chenxiaoyou.github.io/share.jpg\"}],[\"$\",\"link\",\"14\",{\"rel\":\"icon\",\"href\":\"/assets/profile.png\"}],[\"$\",\"$L2e\",\"15\",{}]]\n"])</script></body></html>

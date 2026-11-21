@@ -32,7 +32,7 @@ export default function About() {
 
   return (
     <section className="section statement" id="about" data-moment="word-highlight" ref={hostRef} aria-labelledby="about-h">
-      <div className="wrap">
+      <div className="container">
         <h2 id="about-h">{t("aboutH")}</h2>
         <p className="mo-wh__text">
           {t("aboutStatementPre")}
@@ -43,7 +43,7 @@ export default function About() {
           {t("aboutCopy")}
         </p>
         <div className="about-exp">
-          <p className="t-label">{t("aboutLabel")}</p>
+          <h3 className="about-exp-h">{t("aboutExpLabel")}</h3>
           <ul className="rows">
             <li>
               <span className="rows__name">{t("expBdName")}<small>{t("expBdSub")}</small></span>

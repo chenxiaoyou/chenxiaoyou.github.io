@@ -1,6 +1,6 @@
 # 辰小右个人主页
 
-基于 Next.js（App Router + 静态导出）与 [design-taste-frontend](https://github.com/) 设计套件构建的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
+基于 Next.js（App Router + 静态导出）构建、经 design-taste-frontend 与 hallmark 两套设计技能打磨的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
 
 ## 设计体系
 
