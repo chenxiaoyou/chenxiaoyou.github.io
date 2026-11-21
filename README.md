@@ -1,6 +1,6 @@
 # 辰小右个人主页
 
-基于 Next.js（App Router + 静态导出）构建、经 hallmark 技能治理的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。视觉走素雅简历风（验收报告体）：浅色纸面、衬线姓名、等宽数据、台账式排版。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
+基于 Next.js（App Router + 静态导出）构建、经 design-taste-frontend 与 hallmark 两套设计技能先后打磨的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。当前视觉走素雅简历风（验收报告体）：浅色纸面、衬线姓名、等宽数据、台账式排版。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
 
 ## 设计体系
 

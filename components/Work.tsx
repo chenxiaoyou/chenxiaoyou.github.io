@@ -14,7 +14,8 @@ const PROJECTS = [
     bodyKey: "workApiBody",
     chips: [
       { icon: "python", label: "Pytest" },
-      { icon: "jenkins", label: "Allure" },
+      { icon: "jenkins", label: "Jenkins" },
+      { label: "Allure" },
     ],
     href: "https://github.com/chenxiaoyou/api_auto_test",
     link: true,
@@ -75,16 +76,18 @@ export default function Work() {
           {PROJECTS.map((project) => (
             <li className="work-item" key={project.titleKey}>
               <div className="work-main">
-                <h3>{t(project.titleKey)}</h3>
-                <p>{t(project.lineKey)} {t(project.bodyKey)}</p>
-                <div className="work-stack">
-                  {(project.chips as readonly Chip[]).map((chip) => (
-                    <span className="work-chip" key={chip.label}>
-                      {chip.icon ? <ToolIcon id={chip.icon} /> : null}
-                      {chip.label}
-                    </span>
-                  ))}
+                <div className="work-head">
+                  <h3>{t(project.titleKey)}</h3>
+                  <div className="work-stack">
+                    {(project.chips as readonly Chip[]).map((chip) => (
+                      <span className="work-chip" key={chip.label}>
+                        {chip.icon ? <ToolIcon id={chip.icon} /> : null}
+                        {chip.label}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                <p>{t(project.lineKey)} {t(project.bodyKey)}</p>
               </div>
               <div className="work-foot">
                 <span className="work-status">{t(project.statusKey)}</span>

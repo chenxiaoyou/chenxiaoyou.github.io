@@ -5,20 +5,24 @@
 @import url("tokens.css");
 @import url("base.css");
 
+:root {
+  --nav-h: 64px;
+}
+
 /* ---------------- 布局基元 ---------------- */
 
 .section {
-  padding-block: var(--section-gap);
+  padding-block: var(--space-xl);
 }
 
 .section-head {
   display: grid;
   gap: var(--space-sm);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .section-head h2 {
-  font-size: var(--text-section);
+  font-size: var(--text-2xl);
   font-weight: 500;
   color: var(--color-ink);
   max-width: 30ch;
@@ -164,8 +168,8 @@
 /* ---------------- 报告头（hero） ---------------- */
 
 .hero {
-  padding-top: calc(var(--nav-h) + var(--space-3xl));
-  padding-bottom: var(--space-4xl);
+  padding-top: calc(var(--nav-h) + var(--space-xl));
+  padding-bottom: var(--space-lg);
 }
 
 .report-meta {
@@ -198,11 +202,8 @@
   filter: grayscale(1) contrast(0.95);
 }
 
-.hero__grid {
-  padding-top: var(--space-2xl);
-}
-
 .hero h1 {
+  margin-top: var(--space-md);
   font-size: var(--text-display);
   font-weight: 500;
   line-height: 1.08;
@@ -235,7 +236,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-md);
-  margin-top: var(--space-xl);
+  margin-top: var(--space-lg);
 }
 
 .btn {
@@ -278,7 +279,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg);
-  margin: var(--space-2xl) 0 0;
+  margin: var(--space-lg) 0 0;
   padding: 0;
 }
 
@@ -305,14 +306,14 @@
 
 .work-index {
   display: grid;
-  margin-top: var(--space-xl);
+  margin-top: var(--space-md);
 }
 
 .work-item {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: var(--space-lg);
-  padding: var(--space-xl) 0;
+  padding: var(--space-md) 0;
   border-top: var(--rule-hair) solid var(--color-rule);
   align-items: start;
 }
@@ -345,6 +346,17 @@
   color: var(--color-ink);
 }
 
+.work-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.work-head h3 {
+  margin: 0;
+}
+
 .work-item > div > p {
   margin-top: var(--space-sm);
   font-size: var(--text-md);
@@ -358,7 +370,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-xs);
-  margin-top: var(--space-md);
 }
 
 .work-chip {
@@ -392,83 +403,14 @@
 }
 
 .work-more {
-  margin-top: var(--space-xl);
+  margin-top: var(--space-lg);
   font-size: var(--text-md);
   color: var(--color-ink-2);
 }
 
-/* ---------------- 链路带：change of paper ---------------- */
-
-.pipeline {
-  background: var(--color-paper-2);
-  color: var(--color-ink);
-  padding-block: var(--section-gap);
-}
-
-.pipeline .section-head {
-  display: grid;
-  gap: var(--space-sm);
-}
-
-.pipeline h2 {
-  font-size: var(--text-section);
-  font-weight: 500;
-  color: var(--color-ink);
-  max-width: 30ch;
-}
-
-.pipeline .section-head p {
-  color: var(--color-muted);
-  max-width: 46ch;
-}
-
-/* 验收轨：真实系统的验收轨，页面自绘 */
-
-.pipe-step {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  gap: var(--space-xs);
-  text-align: center;
-}
-
-.pipe-tile {
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  background: var(--color-paper);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius-card);
-  position: relative;
-  z-index: 1;
-}
-
-.pipe-tile img {
-  width: 28px;
-  height: 28px;
-}
-
-.pipe-num {
-  font-family: var(--font-outlier);
-  font-size: var(--text-md);
-  color: var(--color-ink);
-}
-
-.pipe-name {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-ink);
-}
-
-.pipe-sub {
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-}
-
 /* 经历行（ledger）：作品与经历合并屏的收尾块 */
 #work .about-exp {
-  margin-top: var(--space-2xl);
+  margin-top: var(--space-lg);
 }
 
 #work .about-exp h3 {
@@ -487,7 +429,7 @@
   justify-content: space-between;
   align-items: baseline;
   gap: var(--space-md);
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) 0;
   border-top: var(--rule-hair) solid var(--color-rule);
   list-style: none;
 }
@@ -515,7 +457,7 @@
 
 .footer {
   border-top: var(--rule-hair) solid var(--color-rule);
-  padding-block: var(--space-3xl) var(--space-xl);
+  padding-block: var(--space-xl) var(--space-lg);
 }
 
 .footer__close {
@@ -524,7 +466,7 @@
 }
 
 .footer__close h2 {
-  font-size: var(--text-section);
+  font-size: var(--text-2xl);
   font-weight: 500;
   color: var(--color-ink);
   max-width: 24ch;
@@ -535,7 +477,7 @@
 }
 
 .footer__mail {
-  margin-top: var(--space-lg);
+  margin-top: var(--space-md);
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 2.4vw + 0.6rem, 2.2rem);
   color: var(--color-ink);
@@ -554,7 +496,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-md) var(--space-xl);
-  margin-top: var(--space-2xl);
+  margin-top: var(--space-lg);
   font-size: var(--text-sm);
 }
 
@@ -567,21 +509,12 @@
   color: var(--color-ink);
 }
 
-.wordmark-row {
-  margin-top: var(--space-2xl);
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  letter-spacing: -0.01em;
-  color: var(--color-ink-2);
-}
-
 .footer__legal {
   display: grid;
   gap: var(--space-2xs);
   justify-items: start;
-  margin-top: var(--space-xl);
-  padding-top: var(--space-lg);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
   border-top: var(--rule-hair) solid var(--color-rule);
   font-size: var(--text-xs);
   color: var(--color-muted);
@@ -657,33 +590,11 @@ html.js .hero .criteria {
   .criteria {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  #pipeline {
-    --padb: 96px;
-  }
 }
 
 @media (max-width: 40rem) {
   .criteria {
     grid-template-columns: 1fr;
     gap: var(--space-md);
-  }
-
-
-  .pipe-step {
-    grid-template-columns: 56px minmax(0, 1fr);
-    justify-items: start;
-    text-align: left;
-    gap: var(--space-xs) var(--space-md);
-    min-width: 0;
-  }
-
-  .pipe-name {
-    align-self: end;
-  }
-
-  .pipe-sub {
-    grid-column: 2;
-    margin-top: calc(-1 * var(--space-xs));
   }
 }
