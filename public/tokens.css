@@ -1,4 +1,4 @@
-/* Hallmark · v2.0.0 · shape: acceptance report onepage · theme: custom · idea: "验收报告" · paper: oklch(16% 0.012 50) · accent: oklch(46% 0.19 38) · display: IBM Plex Mono · body: IBM Plex Sans · posture: restrained, declared surface --color-sheet · axes: dark/warm/mono-display · v2.0.0 */
+/* Hallmark · v2.1.0 · redesign: restyle (layout kept) · theme: custom · paper: oklch(97.5% 0.004 250) · accent: oklch(42% 0.12 255) · display: Piazzolla · body: Onest · posture: restrained · axes: light/cool/serif-display · v2.1.0 */
 :root {
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
   --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
@@ -6,42 +6,28 @@
   --text-section: clamp(1.9rem, 2.4vw + 1rem, 3.1rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(62% 0.19 30); --color-success: oklch(72% 0.13 155);
+  --color-error: oklch(50% 0.17 25); --color-success: oklch(50% 0.12 150);
   --container: 1360px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(16% 0.012 50);
-  --color-paper-2: oklch(19% 0.014 50);
-  --color-paper-3: oklch(23% 0.016 48);
-  --color-sheet: oklch(94% 0.008 85);
-  --color-ink: oklch(93% 0.008 85);
-  --color-ink-2: oklch(84% 0.01 80);
-  --color-muted: oklch(74% 0.014 70);
-  --color-rule: oklch(32% 0.014 50);
-  --color-accent: oklch(46% 0.19 38);
-  --color-accent-text: oklch(70% 0.15 45);
-  --color-accent-ink: oklch(93% 0.008 85);
-  --color-focus: oklch(66% 0.17 42);
-  --color-faint: oklch(50% 0.014 60);
-  --nav-h: 64px;
-  --color-sheet-ink: oklch(25% 0.03 50);
-  --color-sheet-muted: oklch(45% 0.03 50);
-  --dg-ink: oklch(25% 0.02 50);
-  --dg-muted: oklch(45% 0.03 50);
-  --dg-accent: oklch(55% 0.19 38);
-  --dg-accent-ink: oklch(97% 0.005 85);
-  --dg-border: oklch(30% 0.02 50);
-  --dg-line: oklch(45% 0.03 50);
-  --dg-faint: oklch(72% 0.015 60);
-  --dg-dot: oklch(78% 0.02 60);
-  --dg-node: oklch(93% 0.008 85);
-  --color-statement-unlit: oklch(68% 0.014 70);
-  --font-display: var(--font-plex-mono), "PingFang SC", "Microsoft YaHei", monospace;
-  --font-body: var(--font-plex-mono), "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-outlier: var(--font-display);
-  --radius-card: 6px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
-  --tracking-display: -0.02em;
-  /* taste moments 与 diagram 的别名层 */
+  --color-paper: oklch(97.5% 0.004 250);
+  --color-paper-2: oklch(94.5% 0.005 250);
+  --color-paper-3: oklch(91% 0.006 250);
+  --color-sheet: oklch(95% 0.005 250);
+  --color-ink: oklch(22% 0.01 255);
+  --color-ink-2: oklch(32% 0.012 255);
+  --color-muted: oklch(46% 0.014 255);
+  --color-rule: oklch(89% 0.006 255);
+  --color-accent: oklch(42% 0.12 255);
+  --color-accent-ink: oklch(98% 0.004 250);
+  --color-accent-text: oklch(42% 0.12 255);
+  --color-focus: oklch(45% 0.12 255);
+  --font-display: "Piazzolla", "Songti SC", "Noto Serif SC", Georgia, serif;
+  --font-body: "Onest", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-outlier: var(--font-body);
+  --radius-card: 4px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.015em;
+  /* taste moments 与组件的别名层 */
   --bg: var(--color-paper); --ink: var(--color-ink); --muted: var(--color-muted); --accent: var(--color-accent); --line: var(--color-rule);
-  --font-mono: var(--font-display);
-  --dg-ink: oklch(24% 0.02 50); --dg-muted: oklch(40% 0.03 50); --dg-accent: oklch(55% 0.19 38); --dg-border: oklch(30% 0.02 50); --dg-line: oklch(45% 0.03 50); --dg-faint: oklch(70% 0.02 60); --dg-dot: oklch(75% 0.02 60); --dg-node: oklch(97% 0.005 85); --dg-shadow: none;
+  --font-mono: var(--font-plex-mono), monospace;
+  --dg-ink: oklch(22% 0.01 255); --dg-muted: oklch(46% 0.014 255); --dg-accent: oklch(42% 0.12 255); --dg-border: oklch(85% 0.008 255); --dg-line: oklch(85% 0.008 255); --dg-faint: oklch(70% 0.01 255); --dg-dot: oklch(80% 0.008 255); --dg-node: oklch(100% 0.002 250);
 }

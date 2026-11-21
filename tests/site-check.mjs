@@ -46,21 +46,23 @@ expect(workflow.includes("path: out"), "deploy workflow should upload the static
 expect(workflow.includes("actions/deploy-pages"), "deploy workflow should publish with actions/deploy-pages");
 
 // Hallmark 定制：stamp、tokens、base
-expect(pageCss.includes("/* Hallmark ·"), "page CSS should start with the Hallmark stamp");
+expect(pageCss.includes("/* Hallmark · v2.1.0"), "page CSS should start with the Hallmark stamp (v2.1.0 restyle)");
+expect(pageCss.includes("redesign: restyle"), "page CSS should declare the restyle depth");
 expect(pageCss.includes("idea:"), "stamp should carry the idea line");
 expect(pageCss.includes("posture:"), "stamp should declare the colour posture");
 expect(pageCss.includes("@import url(\"tokens.css\")"), "page CSS should import the tokens");
 expect(pageCss.includes("@import url(\"base.css\")"), "page CSS should import the base rules");
-expect(tokens.includes("--color-paper: oklch(16% 0.012 50)"), "tokens should carry the dark warm paper");
-expect(tokens.includes("--color-accent: oklch(46% 0.19 38)"), "tokens should carry the vermillion accent");
-expect(tokens.includes("--font-display: var(--font-plex-mono)"), "tokens should set IBM Plex Mono as the display face");
-expect(tokens.includes("--font-body: var(--font-plex-mono)"), "tokens should set the mono material as the body face");
+expect(tokens.includes("--color-paper: oklch(97.5% 0.004 250)"), "tokens should carry the light cool paper");
+expect(tokens.includes("--color-accent: oklch(42% 0.12 255)"), "tokens should carry the pine accent");
+expect(tokens.includes("--font-display: \"Piazzolla\""), "tokens should set Piazzolla as the display face");
+expect(tokens.includes("--font-body: \"Onest\""), "tokens should set Onest as the body face");
 expect(tokens.includes("--bg: var(--color-paper)"), "tokens should alias the moment tokens");
 expect(base.includes("overflow-x: clip"), "base should keep overflow-x clip");
 expect(base.includes(":focus-visible"), "base should keep the focus ring");
 expect(base.includes("prefers-reduced-motion"), "base should keep the reduced-motion collapse");
 expect(layout.includes("tokens.css") && layout.includes("base.css"), "layout should load the token sheets");
-expect(layout.includes("IBM+Plex+Mono"), "layout should load IBM Plex Mono");
+expect(layout.includes("family=Piazzolla"), "layout should load Piazzolla");
+expect(layout.includes("family=Onest"), "layout should load Onest");
 expect(layout.includes("site-kind"), "layout should declare meta site-kind");
 expect(layout.includes("page-type"), "layout should declare meta page-type");
 

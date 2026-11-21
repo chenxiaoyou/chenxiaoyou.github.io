@@ -1,17 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SiteProvider } from "@/lib/i18n";
 import SiteNav from "@/components/SiteNav";
-
-const plexMono = IBM_Plex_Mono({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-plex-mono",
-});
 
 const siteDescription =
   "辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。";
@@ -43,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c0f14",
+  themeColor: "#f7f8fa",
 };
 
 // 时刻守卫：word-highlight 由 About 组件手动挂载（__momentsManual）
@@ -58,12 +50,12 @@ const pageCss = readFileSync(join(process.cwd(), "app", "globals.css"), "utf8")
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN" className={plexMono.variable} suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@400;500;600&family=Onest:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: pageCss }} />
