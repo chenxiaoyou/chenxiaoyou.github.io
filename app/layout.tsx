@@ -38,9 +38,6 @@ export const viewport: Viewport = {
   themeColor: "#f7f8fa",
 };
 
-// 时刻守卫：word-highlight 由 About 组件手动挂载（__momentsManual）
-const momentsGuard = `window.__momentsManual = true;document.documentElement.classList.add('mo-js');document.documentElement.classList.add('js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)`;
-
 // 页面 CSS 以内联方式进 HTML：tokens/base 先内联（异步 @import 会造成整页弹跳），stamp 原样保留
 const tokensCss = readFileSync(join(process.cwd(), "public", "tokens.css"), "utf8");
 const baseCss = readFileSync(join(process.cwd(), "public", "base.css"), "utf8");
@@ -59,17 +56,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: pageCss }} />
-        <Script id="moments-guard" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: momentsGuard }} />
-        <link rel="modulepreload" href="/assets/moments/moments.js" />
-        <link rel="modulepreload" href="/assets/moments/lib.js" />
-        <link rel="modulepreload" href="/assets/moments/word-highlight/moment.js" />
       </head>
       <body>
         <SiteProvider>
           <SiteNav />
           {children}
         </SiteProvider>
-        <Script src="/assets/moments/moments.js" type="module" strategy="afterInteractive" />
       </body>
     </html>
   );

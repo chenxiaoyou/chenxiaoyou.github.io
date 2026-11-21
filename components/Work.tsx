@@ -97,6 +97,23 @@ export default function Work() {
             </li>
           ))}
         </ol>
+        <div className="about-exp">
+          <h3 className="about-exp-h">{t("expLabel")}</h3>
+          <ul className="rows">
+            <li>
+              <span className="rows__name">{t("expBdName")}<small>{t("expBdSub")}</small></span>
+              <span className="rows__value">{t("expBdValue")}</span>
+            </li>
+            <li>
+              <span className="rows__name">{t("expBuptName")}<small>{t("expBuptSub")}</small></span>
+              <span className="rows__value">{t("expBuptValue")}</span>
+            </li>
+            <li>
+              <span className="rows__name">{t("expNjuptName")}<small>{t("expNjuptSub")}</small></span>
+              <span className="rows__value">{t("expNjuptValue")}</span>
+            </li>
+          </ul>
+        </div>
         <p className="work-more">
           {t("workMore")}{" "}
           <a className="link" href="/assets/resume.pdf" download>{t("ctaResume")}</a>

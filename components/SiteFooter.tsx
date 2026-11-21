@@ -24,10 +24,6 @@ export default function SiteFooter() {
             <a href="#top">{t("footerTop")}</a>
           </li>
         </ul>
-        <div className="footer__seal-row" aria-hidden="true">
-          <span className="seal">辰</span>
-          <span className="close__word">{t("name")}</span>
-        </div>
         <div className="footer__legal">
           <span>&copy; 2026 {t("name")}</span>
           <span>{t("footerLegal")}</span>

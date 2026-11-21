@@ -1,35 +1,28 @@
 # 辰小右个人主页
 
-基于 Next.js（App Router + 静态导出）构建、经 design-taste-frontend 与 hallmark 两套设计技能打磨的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
+基于 Next.js（App Router + 静态导出）构建、经 hallmark 技能治理的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。视觉走素雅简历风（验收报告体）：浅色纸面、衬线姓名、等宽数据、台账式排版。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
 
 ## 设计体系
 
-页面由 design-taste-frontend 技能派发（deal，非手选）：
+hallmark 全权定制路线（`redesign: restyle`，stamp 见 `public/tokens.css` 首行）：
 
-- **类型**：service（site-kind other）——照片/字体/平色主导，无特效、无暗色页
-- **调色板**：`cobalt-on-sand`（温石地面 `#e6dbc7` + 工程蓝 `#062b8a`）
-- **字型**：Schibsted Grotesk（display 400，tracking -3.5%）
-- **hero**：split（左文右图 + 事实浮卡），进入动画一次
-- **按钮** tonal · **圆角** soft · **导航** nav-centre · **页脚** footer-columns · **节奏** dark-band（链路图反色带）
-- **时刻**：`word-highlight`（statement 逐词点亮，滚动驱动）
+- **令牌**：OKLCH（浅色纸面 `oklch(97.5% 0.004 250)` + 钢青强调 `oklch(42% 0.12 255)`），在 `public/tokens.css`
+- **字型**：Piazzolla（衬线 display）+ Onest（正文）+ IBM Plex Mono（数据/标签），Google css2 引入
+- **底座**：`public/base.css`（Floor 规则：focus-visible、selection、reduced-motion、container）
+- **页面 CSS**：`app/globals.css`；构建时 tokens/base/globals 三个文件内联进 `<head>`（避免异步 @import 弹跳）
+- **门禁**：hallmark sloplint（0 FAIL）、copy-lint、perf（CLS 0.000）、`npm test`
 
-套件文件在 `public/assets/`（system/layout/motion/ui/icons/diagrams/moments），原样加载、不得修改。
+## 页面结构（两屏）
 
-## 页面结构
-
-`app/page.tsx` 组合六个区块（组件在 `components/`）：
+`app/page.tsx` 组合三个组件（在 `components/`）：
 
 | 区块 | 组件 | 说明 |
 | --- | --- | --- |
-| 导航 | `SiteNav.tsx` | nav-centre 固定栏 + 手机抽屉 + 语言切换 |
-| 首屏 | `Hero.tsx` | 姓名/方向 + 头像 + 事实浮卡 |
-| 作品 | `Work.tsx` | 四个项目卡（真彩工具图标 + 真链接） |
-| 工具 | `Stack.tsx` | 16 格工具墙（13 真彩图标 + 3 文字块） |
-| 关于 | `About.tsx` | word-highlight 语句 + 经历 rows |
-| 链路 | `Pipeline.tsx` | 反色带上的质量链路示意图（静态） |
-| 联系 | `SiteFooter.tsx` + `ActionBar.tsx` | close 头行 + 页脚列 + 手机动作条 |
+| 报告头（首屏） | `Hero.tsx` | 受测对象元信息行 + 姓名 h1 + 一句话简介 + 邮件/简历按钮 + 四道工序状态栏 |
+| 作品与经历（次屏） | `Work.tsx` | 四项作品台账（状态 + 链接 + 技术标签）+ 三段经历 rows + 简历补充行 |
+| 联系（页脚） | `SiteFooter.tsx` | 短 close 语 + 邮箱直链 + GitHub/简历/回顶部 + 法务行 |
 
-双语词典与全局语言状态在 `lib/i18n.tsx`（`useSite().t()`）。
+导航 `SiteNav.tsx`：固定栏 + 移动端 sheet + 中英切换。双语词典与语言状态在 `lib/i18n.tsx`（`useSite().t()`）。
 
 ## 本地开发
 
@@ -46,20 +39,12 @@ npm run build
 npm test
 ```
 
-设计检查（改版后重跑）：
-
-```bash
-node <skill>/scripts/copy-lint.mjs out/index.html --kind service
-node <skill>/scripts/consistency.mjs out/index.html --root out --widths 1440,1024,820,768,390 --profile .taste-skill/chrome-check --page service --category "测试开发工程师的个人主页" --primary "发邮件给我"
-node <skill>/scripts/gate.mjs out/index.html
-```
-
 ## 修改内容
 
-- **文案**：`lib/i18n.tsx` 的 `translations`（zh/en 各一份），遵守 copy 规则（h1 命名类别、标题带名词、按钮动词+宾语、不造事实）
-- **项目卡**：`components/Work.tsx` 的卡片数组；链接指向真实仓库
-- **工具墙**：`components/Stack.tsx` 的 `TILES`；新增图标先 `icons.mjs fetch <id> --out public/assets/icons`
-- **链路图**：`components/Pipeline.tsx` 内联 JSON spec（service 页静态、无脉冲）
+- **文案**：`lib/i18n.tsx` 的 `translations`（zh/en 各一份），不造事实
+- **作品/经历**：`components/Work.tsx` 的 `PROJECTS` 数组与经历 rows；链接指向真实仓库
+- **工序状态**：`components/Hero.tsx` 的 `criteria` 数组（在岗/规划中）
+- **令牌/排版**：`public/tokens.css`（颜色、字体）；页面布局在 `app/globals.css`
 - **头像/简历**：替换 `public/assets/profile.png` 与 `public/assets/resume.pdf`
 
 ## GitHub Pages 发布

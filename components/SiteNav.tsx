@@ -5,8 +5,6 @@ import { useSite } from "@/lib/i18n";
 
 const NAV_ITEMS = [
   { id: "work", key: "navWork" },
-  { id: "pipeline", key: "navPipeline" },
-  { id: "about", key: "navAbout" },
   { id: "contact", key: "navContact" },
 ] as const;
 

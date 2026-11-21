@@ -27,8 +27,6 @@ const pageCss = readRequired("app/globals.css");
 const siteNav = readRequired("components/SiteNav.tsx");
 const hero = readRequired("components/Hero.tsx");
 const work = readRequired("components/Work.tsx");
-const about = readRequired("components/About.tsx");
-const pipeline = readRequired("components/Pipeline.tsx");
 const footer = readRequired("components/SiteFooter.tsx");
 const readme = readRequired("README.md");
 const outHome = readRequired("out/index.html");
@@ -61,13 +59,12 @@ expect(base.includes("overflow-x: clip"), "base should keep overflow-x clip");
 expect(base.includes(":focus-visible"), "base should keep the focus ring");
 expect(base.includes("prefers-reduced-motion"), "base should keep the reduced-motion collapse");
 expect(layout.includes("tokens.css") && layout.includes("base.css"), "layout should load the token sheets");
-expect(layout.includes("family=Piazzolla"), "layout should load Piazzolla");
-expect(layout.includes("family=Onest"), "layout should load Onest");
+expect(layout.includes("family=Piazzolla") && layout.includes("family=Onest"), "layout should load Piazzolla and Onest");
 expect(layout.includes("site-kind"), "layout should declare meta site-kind");
 expect(layout.includes("page-type"), "layout should declare meta page-type");
 
 // 组件与结构
-for (const section of ["Hero", "Work", "About", "Pipeline", "SiteFooter"]) {
+for (const section of ["Hero", "Work", "SiteFooter"]) {
   expect(page.includes(section), `homepage should compose the ${section} section`);
 }
 expect(siteNav.includes("nav__toggle"), "navigation should keep the phone menu toggle");
@@ -86,24 +83,17 @@ expect(work.includes('ToolIcon id="python"') || work.includes("icon: \"python\""
 expect(work.includes("workEvalStatus"), "work should include the AI evaluation practice");
 expect(!work.includes("/blogs/"), "work should not link to removed blog routes");
 
-expect(i18n.includes("五年多互联网测试开发经验"), "i18n should keep the real Chinese about copy");
-expect(i18n.includes("Five-plus years"), "i18n should keep the English about copy");
-expect(i18n.includes("把质量风险，拦在发布之前"), "i18n should keep the Chinese hero headline");
-expect(i18n.includes("Stop quality risks before the release"), "i18n should keep the English hero headline");
+expect(i18n.includes("五年多，只做一件事"), "i18n should keep the real experience fact");
+expect(i18n.includes("Five years, one job"), "i18n should keep the English experience fact");
 expect(!i18n.includes("dockBlogs"), "i18n should not carry removed blog keys");
 
-expect(about.includes("data-moment=\"word-highlight\""), "about should host the dealt word-highlight moment");
-expect(about.includes("mo-wh__text"), "about should carry the statement text");
-expect(about.includes("aboutExpLabel"), "about should label the experience rows");
-expect(about.includes("expBdName"), "about should keep the experience rows");
+expect(work.includes("rows__name") && work.includes("rows__value"), "work should merge the experience rows as a ruled ledger");
 
-expect(pipeline.includes("pipe-rail"), "pipeline should carry the page-drawn acceptance rail");
-expect(pipeline.includes("dgStepRegression"), "the rail should keep the four stages");
-expect(pipeline.includes('role="img"'), "the rail should be named as a diagram of a real system");
+
 
 expect(footer.includes("footer__mail"), "footer should carry the plain email contact");
 expect(footer.includes("mailto:chenxiaoyou19@gmail.com"), "footer should expose the real email");
-expect(footer.includes("close__word"), "footer should end with the name set wide");
+expect(footer.includes("footer__mail"), "footer should carry the plain email contact");
 expect(footer.includes("footer__legal"), "footer should render the legal row");
 expect(footer.includes("socials"), "footer should keep the GitHub mark");
 
@@ -128,10 +118,9 @@ if (existsSync(resumePath)) {
   expect(statSync(resumePath).size > 100, "public resume PDF should not be empty");
 }
 
-expect(outHome.includes("把质量风险，拦在发布之前"), "built homepage should carry the hero headline");
+expect(outHome.includes("<h1 id=\"hero-h\">辰小右</h1>"), "built homepage should carry the name as the hero headline");
 expect(outHome.includes("rel=\"canonical\" href=\"https://chenxiaoyou.github.io\""), "homepage should have canonical metadata");
 expect(outHome.includes("api_auto_test"), "built homepage should render the projects");
-expect(outHome.includes("data-moment=\"word-highlight\""), "built homepage should host the dealt moment");
 expect(outHome.includes("/assets/icons/python.svg"), "built homepage should load real icons");
 expect(outHome.includes("mailto:chenxiaoyou19@gmail.com"), "built homepage should link the email");
 expect(!outHome.includes("/blogs/"), "built homepage should not expose removed blog routes");
