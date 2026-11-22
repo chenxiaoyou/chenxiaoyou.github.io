@@ -77,8 +77,10 @@ expect(siteNav.includes("skip-link"), "navigation should keep the skip link");
 expect(hero.includes("report-meta"), "hero should carry the acceptance-report header");
 expect(hero.includes("criteria"), "hero should carry the four-stage criteria rail");
 expect(hero.includes("/assets/profile.png"), "hero should show the client's own avatar as the specimen");
-expect(hero.includes("mailto:chenxiaoyou19@gmail.com"), "hero primary action should be the real email");
-expect(hero.includes("/assets/resume.pdf"), "hero should offer the resume download");
+// v1.7.2：CTA 只保留右上角导航一处（icon + 文案，窄屏纯 icon）
+expect(siteNav.includes("mailto:chenxiaoyou19@gmail.com"), "nav primary action should be the real email");
+expect(siteNav.includes("/assets/resume.pdf"), "nav should offer the resume download");
+expect(siteNav.includes("nav__cta-icon"), "nav CTAs should render with icons");
 expect(!hero.includes("hero__kicker"), "hero should not carry an eyebrow");
 
 expect(work.includes("work-index"), "work should render as a numbered index");

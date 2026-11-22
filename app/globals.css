@@ -73,6 +73,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--text-lg);
+  white-space: nowrap;
   letter-spacing: -0.01em;
   color: var(--color-ink);
   text-decoration: none;
@@ -106,6 +107,9 @@
 }
 
 .nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: none;
@@ -114,6 +118,10 @@
   white-space: nowrap;
   transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out),
     background-color var(--dur-micro) var(--ease-out);
+}
+
+.nav__cta-icon {
+  flex: none;
 }
 
 .nav__cta--ghost {
@@ -276,49 +284,8 @@
   color: var(--color-ink);
 }
 
-.btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  min-height: 48px;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-card);
-  font-weight: 500;
-  text-decoration: none;
-  transition: transform var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
-}
-
-.btn:active {
-  transform: translateY(1px) scale(0.99);
-}
-
-.btn--primary {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
-}
-
-.btn--primary:hover {
-  transform: translateY(-1px);
-}
-
-.btn--secondary {
-  border: 1px solid var(--color-rule);
-  color: var(--color-ink);
-}
-
-.btn--secondary:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
 /* 验收项轨：signature */
+
 .criteria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -583,7 +550,6 @@
 html.js .hero .report-meta,
 html.js .hero h1,
 html.js .hero__lead,
-html.js .hero .btn-row,
 html.js .hero .criteria {
   animation: settle 0.6s var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 60ms);
@@ -604,7 +570,6 @@ html.js .hero .criteria {
   html.js .hero .report-meta,
   html.js .hero h1,
   html.js .hero__lead,
-  html.js .hero .btn-row,
   html.js .hero .criteria {
     animation: none;
   }
@@ -613,8 +578,16 @@ html.js .hero .criteria {
 /* ---------------- 响应式 ---------------- */
 
 @media (max-width: 60rem) {
-  .nav__links,
+  .nav__links {
+    display: none;
+  }
+
+  /* 首屏不再放按钮：CTA 以纯图标常驻右上角 */
   .nav__cta {
+    padding: var(--space-sm);
+  }
+
+  .nav__cta-text {
     display: none;
   }
 

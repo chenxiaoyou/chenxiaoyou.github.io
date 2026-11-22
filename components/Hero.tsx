@@ -28,10 +28,6 @@ export default function Hero() {
           <span className="is-role">{t("leadRole")}</span>
           {t("leadLine")}
         </p>
-        <div className="btn-row">
-          <a className="btn btn--primary" href="mailto:chenxiaoyou19@gmail.com">{t("ctaEmail")}</a>
-          <a className="btn btn--secondary" href="/assets/resume.pdf" download>{t("ctaResume")}</a>
-        </div>
         <dl className="criteria">
           {criteria.map((item) => (
             <div key={item.name}>
