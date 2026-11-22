@@ -6,7 +6,7 @@
 
 hallmark 全权定制路线（`redesign: restyle`，stamp 见 `public/tokens.css` 首行）：
 
-- **令牌**：OKLCH（浅色纸面 `oklch(97.5% 0.004 250)` + 钢青强调 `oklch(42% 0.12 255)`），在 `public/tokens.css`
+- **令牌**：OKLCH（浅色纸面 `oklch(97.5% 0.004 250)` + 钢青强调 `oklch(42% 0.12 255)`），在 `public/tokens.css`；暗黑主题为同族冷纸反相（`[data-theme="dark"]`），导航可切换、存档于 `site-theme`，首帧前有防闪色引导脚本，头像永远保持彩色
 - **字型**：Piazzolla（衬线 display）+ Onest（正文）+ IBM Plex Mono（数据/标签），Google css2 引入
 - **底座**：`public/base.css`（Floor 规则：focus-visible、selection、reduced-motion、container）
 - **页面 CSS**：`app/globals.css`；构建时 tokens/base/globals 三个文件内联进 `<head>`（避免异步 @import 弹跳）

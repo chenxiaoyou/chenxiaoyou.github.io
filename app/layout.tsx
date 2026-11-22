@@ -38,6 +38,10 @@ export const viewport: Viewport = {
   themeColor: "#f7f8fa",
 };
 
+// 主题引导：首帧渲染前落定深浅（存档 > 系统偏好 > 浅色），避免切换前闪色
+const themeBootstrap =
+  "(function(){try{var s=localStorage.getItem('site-theme');var t=(s==='dark'||s==='light')?s:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch(e){}})()";
+
 // 页面 CSS 以内联方式进 HTML：tokens/base 先内联（异步 @import 会造成整页弹跳），stamp 原样保留
 const tokensCss = readFileSync(join(process.cwd(), "public", "tokens.css"), "utf8");
 const baseCss = readFileSync(join(process.cwd(), "public", "base.css"), "utf8");
@@ -49,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

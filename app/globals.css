@@ -123,6 +123,34 @@
   color: var(--color-accent);
 }
 
+.nav__theme {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: var(--space-2xs);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.nav__theme:hover {
+  color: var(--color-ink);
+}
+
+.nav__theme .icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] .nav__theme .icon-sun {
+  display: block;
+}
+
+[data-theme="dark"] .nav__theme .icon-moon {
+  display: none;
+}
+
 .nav__toggle {
   display: none;
   width: 44px;
@@ -506,6 +534,12 @@
 
 .footer__legal .socials a {
   color: var(--color-muted);
+}
+
+.footer__legal .socials svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .footer__legal .socials a:hover {

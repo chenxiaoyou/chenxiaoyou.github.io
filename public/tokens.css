@@ -31,3 +31,23 @@
   --font-mono: var(--font-plex-mono), monospace;
   --dg-ink: oklch(22% 0.01 255); --dg-muted: oklch(46% 0.014 255); --dg-accent: oklch(42% 0.12 255); --dg-border: oklch(85% 0.008 255); --dg-line: oklch(85% 0.008 255); --dg-faint: oklch(70% 0.01 255); --dg-dot: oklch(80% 0.008 255); --dg-node: oklch(100% 0.002 250);
 }
+
+/* 暗黑主题：同族冷纸反相（250-255 色相不变）；头像永远保持彩色 */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-error: oklch(68% 0.16 25);
+  --color-success: oklch(70% 0.12 150);
+  --color-paper: oklch(20% 0.008 255);
+  --color-paper-2: oklch(23.5% 0.009 255);
+  --color-paper-3: oklch(27% 0.01 255);
+  --color-sheet: oklch(23% 0.009 255);
+  --color-ink: oklch(93% 0.005 250);
+  --color-ink-2: oklch(82% 0.007 250);
+  --color-muted: oklch(64% 0.011 250);
+  --color-rule: oklch(32% 0.01 255);
+  --color-accent: oklch(68% 0.11 250);
+  --color-accent-ink: oklch(18% 0.012 255);
+  --color-accent-text: oklch(75% 0.11 250);
+  --color-focus: oklch(75% 0.11 250);
+  --dg-ink: oklch(93% 0.005 250); --dg-muted: oklch(64% 0.011 250); --dg-accent: oklch(68% 0.11 250); --dg-border: oklch(34% 0.01 255); --dg-line: oklch(34% 0.01 255); --dg-faint: oklch(48% 0.01 255); --dg-dot: oklch(38% 0.01 255); --dg-node: oklch(25% 0.01 255);
+}

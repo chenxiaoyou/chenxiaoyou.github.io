@@ -54,6 +54,9 @@ expect(tokens.includes("--color-paper: oklch(97.5% 0.004 250)"), "tokens should 
 expect(tokens.includes("--color-accent: oklch(42% 0.12 255)"), "tokens should carry the pine accent");
 expect(tokens.includes("--font-display: \"Piazzolla\""), "tokens should set Piazzolla as the display face");
 expect(tokens.includes("--font-body: \"Onest\""), "tokens should set Onest as the body face");
+expect(tokens.includes('[data-theme="dark"]'), "tokens should define the dark theme");
+expect(tokens.includes("color-scheme: dark"), "dark theme should declare color-scheme");
+expect(layout.includes("site-theme"), "layout should bootstrap the theme before first paint");
 expect(tokens.includes("--bg: var(--color-paper)"), "tokens should alias the moment tokens");
 expect(base.includes("overflow-x: clip"), "base should keep overflow-x clip");
 expect(base.includes(":focus-visible"), "base should keep the focus ring");
@@ -68,6 +71,7 @@ for (const section of ["Hero", "Work", "SiteFooter"]) {
   expect(page.includes(section), `homepage should compose the ${section} section`);
 }
 expect(siteNav.includes("nav__toggle"), "navigation should keep the phone menu toggle");
+expect(siteNav.includes("nav__theme"), "navigation should offer the theme toggle");
 expect(siteNav.includes("skip-link"), "navigation should keep the skip link");
 expect(hero.includes("report-meta"), "hero should carry the acceptance-report header");
 expect(hero.includes("criteria"), "hero should carry the four-stage criteria rail");
