@@ -32,6 +32,8 @@ export default function SiteNav() {
           ))}
         </nav>
         <div className="nav__actions">
+          <a className="nav__cta nav__cta--ghost" href="/assets/resume.pdf" download>{t("ctaResume")}</a>
+          <a className="nav__cta nav__cta--fill" href="mailto:chenxiaoyou19@gmail.com">{t("ctaEmail")}</a>
           <button
             className="nav__theme"
             type="button"

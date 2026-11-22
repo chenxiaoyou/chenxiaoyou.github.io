@@ -105,6 +105,38 @@
   margin-inline-start: auto;
 }
 
+.nav__cta {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-card);
+  padding: var(--space-2xs) var(--space-md);
+  white-space: nowrap;
+  transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out),
+    background-color var(--dur-micro) var(--ease-out);
+}
+
+.nav__cta--ghost {
+  border: 1px solid var(--color-rule);
+  color: var(--color-ink-2);
+}
+
+.nav__cta--ghost:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.nav__cta--fill {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.nav__cta--fill:hover {
+  color: var(--color-accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .nav__lang {
   appearance: none;
   background: none;
@@ -581,7 +613,8 @@ html.js .hero .criteria {
 /* ---------------- 响应式 ---------------- */
 
 @media (max-width: 60rem) {
-  .nav__links {
+  .nav__links,
+  .nav__cta {
     display: none;
   }
 

@@ -72,6 +72,7 @@ for (const section of ["Hero", "Work", "SiteFooter"]) {
 }
 expect(siteNav.includes("nav__toggle"), "navigation should keep the phone menu toggle");
 expect(siteNav.includes("nav__theme"), "navigation should offer the theme toggle");
+expect(siteNav.includes("nav__cta--fill") && siteNav.includes("nav__cta--ghost"), "navigation should carry the mail and resume CTAs top-right");
 expect(siteNav.includes("skip-link"), "navigation should keep the skip link");
 expect(hero.includes("report-meta"), "hero should carry the acceptance-report header");
 expect(hero.includes("criteria"), "hero should carry the four-stage criteria rail");
