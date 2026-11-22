@@ -32,19 +32,17 @@ export default function SiteNav() {
           ))}
         </nav>
         <div className="nav__actions">
-          <a className="nav__cta nav__cta--ghost" href="/assets/resume.pdf" download aria-label={t("ctaResume")}>
+          <a className="nav__cta nav__cta--ghost" href="/assets/resume.pdf" download aria-label={t("ctaResume")} title={t("ctaResume")}>
             <svg className="nav__cta-icon" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3v11m0 0 4.5-4.5M12 14l-4.5-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M4.5 20h15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
-            <span className="nav__cta-text">{t("ctaResume")}</span>
           </a>
-          <a className="nav__cta nav__cta--fill" href="mailto:chenxiaoyou19@gmail.com" aria-label={t("ctaEmail")}>
+          <a className="nav__cta nav__cta--fill" href="mailto:chenxiaoyou19@gmail.com" aria-label={t("ctaEmail")} title={t("ctaEmail")}>
             <svg className="nav__cta-icon" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
               <path d="m3.5 7.5 8.5 5.5 8.5-5.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="nav__cta-text">{t("ctaEmail")}</span>
           </a>
           <button
             className="nav__theme"

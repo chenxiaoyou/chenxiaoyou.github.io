@@ -109,13 +109,10 @@
 .nav__cta {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2xs);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  justify-content: center;
   text-decoration: none;
   border-radius: var(--radius-card);
-  padding: var(--space-2xs) var(--space-md);
-  white-space: nowrap;
+  padding: var(--space-sm);
   transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out),
     background-color var(--dur-micro) var(--ease-out);
 }
@@ -579,15 +576,6 @@ html.js .hero .criteria {
 
 @media (max-width: 60rem) {
   .nav__links {
-    display: none;
-  }
-
-  /* 首屏不再放按钮：CTA 以纯图标常驻右上角 */
-  .nav__cta {
-    padding: var(--space-sm);
-  }
-
-  .nav__cta-text {
     display: none;
   }
 
