@@ -1,4 +1,4 @@
-/* Hallmark · v2.1.0 · redesign: restyle (layout kept) · genre: modern-minimal · theme: custom · job: hire · idea: "素雅的简历式一页：把质量风险拦在发布之前，四个方向全部真实" · vibe: "安静、书卷、克制的冷纸墨青" · nav: one line, wordmark + four words + plain mail action · footer: contact details end, the name set modest · hero: report header, criteria rail as the signature · imagery: none (type carries it; the client's avatar is the one grayscale specimen) · signature: the criteria rail with real statuses
+/* Hallmark · v2.1.0 · redesign: restyle (layout kept) · genre: modern-minimal · theme: custom · job: hire · idea: "素雅的简历式一页：把质量风险拦在发布之前，四个方向全部真实" · vibe: "安静、书卷、克制的冷纸墨青" · nav: one line, wordmark + four words + plain mail action · footer: contact details end, the name set modest · hero: report header, criteria rail as the signature · imagery: none (type carries it; the client's avatar in full colour — a living person's photo is never grey) · signature: the criteria rail with real statuses
  * paper: oklch(97.5% 0.004 250) · accent: oklch(42% 0.12 255) · display: Piazzolla · body: Onest · hero: report header · posture: restrained · axes: light/cool/serif-display · v2.1.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V3 · weakest: V——restyle 保留五屏布局，与上一版共享结构骨架；靠浅色冷纸 + 书卷 display 移轴区分 · redesign: restyle */
 
@@ -199,7 +199,6 @@
   border-radius: var(--radius-card);
   border: 1px solid var(--color-rule);
   margin-inline-start: auto;
-  filter: grayscale(1) contrast(0.95);
 }
 
 .hero h1 {
