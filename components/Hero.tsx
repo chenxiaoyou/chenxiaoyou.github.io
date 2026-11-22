@@ -20,14 +20,25 @@ export default function Hero() {
           <span>{t("metaStatus")} <strong>{t("metaStatusValue")}</strong></span>
           <span className="is-role">{t("role")}</span>
           <time dateTime="2026-11">{t("metaDate")}</time>
-          {/* CLIENT FILE 头像：public/assets/profile.png（客户提供，可换真实肖像） */}
-          <img className="specimen" src="/assets/profile.png" alt={t("avatarAlt")} width="48" height="48" fetchPriority="high" />
         </div>
-        <h1 id="hero-h">{t("h1")}</h1>
-        <p className="hero__lead">
-          <span className="is-role">{t("leadRole")}</span>
-          {t("leadLine")}
-        </p>
+        <div className="hero__body">
+          <div className="hero__body-main">
+            <h1 id="hero-h">{t("h1")}</h1>
+            <p className="hero__lead">
+              <span className="is-role">{t("leadRole")}</span>
+              {t("leadLine")}
+            </p>
+          </div>
+          {/* 肖像：public/assets/profile.png（600×600 源图，展示 200px 级别仍锐利；可换真实肖像） */}
+          <img
+            className="portrait"
+            src="/assets/profile.png"
+            alt={t("avatarAlt")}
+            width="200"
+            height="200"
+            fetchPriority="high"
+          />
+        </div>
         <dl className="criteria">
           {criteria.map((item) => (
             <div key={item.name}>
