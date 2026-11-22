@@ -31,7 +31,6 @@ export default function SiteNav() {
           >
             {t("langOther")}
           </button>
-          <a className="nav__mail" href="mailto:chenxiaoyou19@gmail.com">{t("ctaEmail")}</a>
           <button
             className="nav__toggle"
             type="button"
@@ -52,8 +51,6 @@ export default function SiteNav() {
           {NAV_ITEMS.map((item) => (
             <a key={item.id} href={`#${item.id}`} onClick={() => setOpen(false)}>{t(item.key)}</a>
           ))}
-          <a href="mailto:chenxiaoyou19@gmail.com" onClick={() => setOpen(false)}>{t("ctaEmail")}</a>
-          <a href="/assets/resume.pdf" download onClick={() => setOpen(false)}>{t("ctaResume")}</a>
         </nav>
       )}
     </header>

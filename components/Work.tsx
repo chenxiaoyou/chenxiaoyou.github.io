@@ -118,8 +118,7 @@ export default function Work() {
           </ul>
         </div>
         <p className="work-more">
-          {t("workMore")}{" "}
-          <a className="link" href="/assets/resume.pdf" download>{t("ctaResume")}</a>
+          {t("workMore")}
         </p>
       </div>
     </section>

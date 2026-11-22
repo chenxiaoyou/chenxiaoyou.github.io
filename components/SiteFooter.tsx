@@ -18,9 +18,6 @@ export default function SiteFooter() {
             <a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer">GitHub</a>
           </li>
           <li>
-            <a href="/assets/resume.pdf" download>{t("ctaResume")}</a>
-          </li>
-          <li>
             <a href="#top">{t("footerTop")}</a>
           </li>
         </ul>
