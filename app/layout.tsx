@@ -6,7 +6,7 @@ import { SiteProvider } from "@/lib/i18n";
 import SiteNav from "@/components/SiteNav";
 
 const siteDescription =
-  "辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检，现居北京。";
+  "辰小右的个人主页：五年多互联网测试开发经验，做自动化回归、CI 质量门禁与稳定性巡检。";
 
 export const metadata: Metadata = {
   title: "辰小右：测试开发工程师，把质量风险拦在发布之前",
