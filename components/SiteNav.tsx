@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useSite } from "@/lib/i18n";
 
 const NAV_ITEMS = [
-  { id: "work", key: "navWork" },
+  { id: "experience", key: "navExperience" },
+  { id: "works", key: "navWorks" },
   { id: "contact", key: "navContact" },
 ] as const;
 

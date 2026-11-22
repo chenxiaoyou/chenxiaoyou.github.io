@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import Work from "@/components/Work";
+import Resume from "@/components/Resume";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function HomePage() {
@@ -7,7 +7,7 @@ export default function HomePage() {
     <>
       <main id="top">
         <Hero />
-        <Work />
+        <Resume />
       </main>
       <SiteFooter />
     </>

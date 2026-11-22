@@ -13,6 +13,7 @@
 
 .section {
   padding-block: var(--space-xl);
+  border-top: var(--rule-hair) solid var(--color-rule);
 }
 
 .section-head {
@@ -416,29 +417,12 @@
   font-size: var(--text-sm);
 }
 
-.work-more {
-  margin-top: var(--space-lg);
-  font-size: var(--text-md);
-  color: var(--color-ink-2);
-}
-
-/* 经历行（ledger）：作品与经历合并屏的收尾块 */
-#work .about-exp {
-  margin-top: var(--space-lg);
-}
-
-#work .about-exp h3 {
-  font-size: var(--text-md);
-  font-weight: 500;
-  color: var(--color-ink-2);
-}
-
-#work .about-exp .rows {
+/* 台账行（rows）：教育背景 / 专业技能 / 工作经历共用 */
+.rows {
   display: grid;
-  margin-top: var(--space-md);
 }
 
-#work .about-exp .rows li {
+.rows li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -448,23 +432,30 @@
   list-style: none;
 }
 
-#work .about-exp .rows .rows__name {
+.rows .rows__name {
   font-weight: 500;
   color: var(--color-ink);
 }
 
-#work .about-exp .rows .rows__name small {
+.rows .rows__name small {
   display: block;
   font-weight: 400;
   color: var(--color-muted);
   font-size: var(--text-sm);
 }
 
-#work .about-exp .rows .rows__value {
+.rows .rows__value {
   font-family: var(--font-outlier);
   font-size: var(--text-sm);
   color: var(--color-muted);
   white-space: nowrap;
+}
+
+.eval-body {
+  font-size: var(--text-md);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+  max-width: 42em;
 }
 
 /* ---------------- 页脚：联系细节收尾 ---------------- */
