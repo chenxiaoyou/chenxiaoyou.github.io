@@ -28,6 +28,7 @@ export default function Hero() {
               <span className="is-role">{t("leadRole")}</span>
               {t("leadLine")}
             </p>
+            <p className="hero__motto">{t("motto")}</p>
           </div>
           {/* 肖像：public/assets/profile.png（600×600 源图，展示 200px 级别仍锐利；可换真实肖像） */}
           <img
