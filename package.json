@@ -1,6 +1,6 @@
 {
   "name": "chenxiaoyou-homepage",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "scripts": {
     "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
