@@ -16,12 +16,14 @@ type LedgerEntry = {
   bodyKey: TranslationKey;
   chips: readonly Chip[];
   href: string | null;
+  kind: "work" | "side";
 };
 
 type Row = { nameKey: TranslationKey; subKey?: TranslationKey; valueKey: TranslationKey };
 
-const PROJECTS: readonly LedgerEntry[] = [
+const CARDS: readonly LedgerEntry[] = [
   {
+    kind: "work",
     titleKey: "workApiTitle",
     statusKey: "workApiStatus",
     lineKey: "workApiLine",
@@ -34,6 +36,7 @@ const PROJECTS: readonly LedgerEntry[] = [
     href: "https://github.com/chenxiaoyou/api_auto_test",
   },
   {
+    kind: "work",
     titleKey: "workEvalTitle",
     statusKey: "workEvalStatus",
     lineKey: "workEvalLine",
@@ -45,10 +48,8 @@ const PROJECTS: readonly LedgerEntry[] = [
     ],
     href: null,
   },
-];
-
-const WORKS: readonly LedgerEntry[] = [
   {
+    kind: "side",
     titleKey: "workMewcodeTitle",
     statusKey: "workMewcodeStatus",
     lineKey: "workMewcodeLine",
@@ -61,6 +62,7 @@ const WORKS: readonly LedgerEntry[] = [
     href: null,
   },
   {
+    kind: "side",
     titleKey: "workMewhelpTitle",
     statusKey: "workMewhelpStatus",
     lineKey: "workMewhelpLine",
@@ -73,19 +75,10 @@ const WORKS: readonly LedgerEntry[] = [
   },
 ];
 
-const EDU_ROWS: readonly Row[] = [
+const BACKGROUND_ROWS: readonly Row[] = [
+  { nameKey: "expBdName", subKey: "expBdSub", valueKey: "expBdValue" },
   { nameKey: "expBuptName", subKey: "expBuptSub", valueKey: "expBuptValue" },
   { nameKey: "expNjuptName", subKey: "expNjuptSub", valueKey: "expNjuptValue" },
-];
-
-const SKILL_ROWS: readonly Row[] = [
-  { nameKey: "skillRegression", valueKey: "skillsTbd" },
-  { nameKey: "skillGate", valueKey: "skillsTbd" },
-  { nameKey: "skillReliability", valueKey: "skillsTbd" },
-];
-
-const EXP_ROWS: readonly Row[] = [
-  { nameKey: "expBdName", subKey: "expBdSub", valueKey: "expBdValue" },
 ];
 
 function SectionHead({ h, hKey, lineKey }: { h: string; hKey: TranslationKey; lineKey?: TranslationKey }) {
@@ -115,84 +108,53 @@ function Rows({ rows }: { rows: readonly Row[] }) {
   );
 }
 
-function Ledger({ entries }: { entries: readonly LedgerEntry[] }) {
+function WorkCards({ entries }: { entries: readonly LedgerEntry[] }) {
   const { t } = useSite();
   return (
-    <ol className="work-index">
+    <ul className="work-cards">
       {entries.map((entry) => (
-        <li className="work-item" key={entry.titleKey}>
-          <div className="work-main">
-            <div className="work-head">
-              <h3>{t(entry.titleKey)}</h3>
-              <div className="work-stack">
-                {entry.chips.map((chip) => (
-                  <span className="work-chip" key={chip.label}>
-                    {chip.icon ? <ToolIcon id={chip.icon} /> : null}
-                    {chip.label}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <p>{t(entry.lineKey)} {t(entry.bodyKey)}</p>
+        <li className="work-card" key={entry.titleKey} data-kind={entry.kind}>
+          <div className="work-card__head">
+            <span className="work-card__kind">{t(entry.kind === "work" ? "cardKindWork" : "cardKindSide")}</span>
+            <span className="work-card__status">{t(entry.statusKey)}</span>
           </div>
-          <div className="work-foot">
-            <span className="work-status">{t(entry.statusKey)}</span>
-            {entry.href && (
-              <a className="link" href={entry.href} target="_blank" rel="noopener noreferrer">
-                {t("projectRepoLink")}
-              </a>
-            )}
+          <h3>{t(entry.titleKey)}</h3>
+          <div className="work-stack">
+            {entry.chips.map((chip) => (
+              <span className="work-chip" key={chip.label}>
+                {chip.icon ? <ToolIcon id={chip.icon} /> : null}
+                {chip.label}
+              </span>
+            ))}
           </div>
+          <p>
+            {t(entry.lineKey)} {t(entry.bodyKey)}
+          </p>
+          {entry.href ? (
+            <a className="link work-card__link" href={entry.href} target="_blank" rel="noopener noreferrer">
+              {t("projectRepoLink")}
+            </a>
+          ) : null}
         </li>
       ))}
-    </ol>
+    </ul>
   );
 }
 
 export default function Resume() {
-  const { t } = useSite();
-
   return (
     <>
-      <section className="section" id="education" aria-labelledby="edu-h">
-        <div className="container">
-          <SectionHead h="edu-h" hKey="eduH" lineKey="eduLine" />
-          <Rows rows={EDU_ROWS} />
-        </div>
-      </section>
-
-      <section className="section" id="skills" aria-labelledby="skills-h">
-        <div className="container">
-          <SectionHead h="skills-h" hKey="skillsH" lineKey="skillsLine" />
-          <Rows rows={SKILL_ROWS} />
-        </div>
-      </section>
-
       <section className="section" id="experience" aria-labelledby="exp-h">
         <div className="container">
-          <SectionHead h="exp-h" hKey="expH" lineKey="expLine" />
-          <Rows rows={EXP_ROWS} />
-        </div>
-      </section>
-
-      <section className="section" id="projects" aria-labelledby="projects-h">
-        <div className="container">
-          <SectionHead h="projects-h" hKey="projectsH" lineKey="projectsLine" />
-          <Ledger entries={PROJECTS} />
+          <SectionHead h="exp-h" hKey="backgroundH" lineKey="backgroundLine" />
+          <Rows rows={BACKGROUND_ROWS} />
         </div>
       </section>
 
       <section className="section" id="works" aria-labelledby="works-h">
         <div className="container">
-          <SectionHead h="works-h" hKey="worksH" lineKey="worksLine" />
-          <Ledger entries={WORKS} />
-        </div>
-      </section>
-
-      <section className="section" id="evaluation" aria-labelledby="eval-h">
-        <div className="container">
-          <SectionHead h="eval-h" hKey="evalH" />
-          <p className="eval-body">{t("evalBody")}</p>
+          <SectionHead h="works-h" hKey="selectedWorkH" lineKey="selectedWorkLine" />
+          <WorkCards entries={CARDS} />
         </div>
       </section>
     </>

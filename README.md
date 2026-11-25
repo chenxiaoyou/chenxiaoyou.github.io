@@ -1,6 +1,6 @@
 # 辰小右个人主页
 
-基于 Next.js（App Router + 静态导出）构建、经 design-taste-frontend 与 hallmark 两套设计技能先后打磨的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。当前视觉走素雅简历风（验收报告体）：浅色纸面、衬线姓名、等宽数据、台账式排版。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
+基于 Next.js（App Router + 静态导出）构建、经 design-taste-frontend 与 hallmark 两套设计技能先后打磨的静态单页个人主页，面向测试开发、泛自动化与稳定性方向的个人展示。当前视觉走 **路线 A：真·一页简历**（v2.2.0）：浅色纸面、首屏定位 + 标签 + CTA，正文仅「背景」与「代表作」卡片。正式站点由 GitHub Pages 托管：[https://chenxiaoyou.github.io](https://chenxiaoyou.github.io)。
 
 ## 设计体系
 
@@ -12,17 +12,17 @@ hallmark 全权定制路线（`redesign: restyle`，stamp 见 `public/tokens.css
 - **页面 CSS**：`app/globals.css`；构建时 tokens/base/globals 三个文件内联进 `<head>`（避免异步 @import 弹跳）
 - **门禁**：hallmark sloplint（0 FAIL）、copy-lint、perf（CLS 0.000）、`npm test`
 
-## 页面结构（六段式简历）
+## 页面结构（路线 A）
 
 `app/page.tsx` 组合三个组件（在 `components/`）：
 
 | 区块 | 组件 | 说明 |
 | --- | --- | --- |
-| 报告头 | `Hero.tsx` | 受测对象元信息行 + 姓名 h1 + 一句话简介 + 四道工序状态栏 |
-| 六段正文 | `Resume.tsx` | 教育背景 / 专业技能 / 工作经历 / 项目经历 / 我的作品 / 自我评价（缺失内容以（占位）标注） |
+| 首屏 | `Hero.tsx` | 头像 + 定位句 + 简介 + 三个方向标签 + 签名 + 邮件/简历/GitHub |
+| 正文 | `Resume.tsx` | **背景**（经历 + 学历 `rows`）+ **做过什么**（`work-cards` 卡片） |
 | 联系 | `SiteFooter.tsx` | 短 close 语 + 邮箱直链 + GitHub/回顶部 + 法务行 |
 
-`Resume.tsx` 六段均为台账式：教育/技能/经历用 `rows` 行，项目/作品用 `work-index` 条目（状态 + 标签 + 链接）。技能与自我评价暂为占位，补内容时改 `lib/i18n.tsx` 的 `skill*`/`evalBody` 键。
+代表作与文案在 `lib/i18n.tsx`；卡片数据在 `Resume.tsx` 的 `CARDS` / `BACKGROUND_ROWS`。
 
 导航 `SiteNav.tsx`：固定栏 + 右上角纯图标控件（下载简历/发邮件/深浅/语言）+ 移动端 sheet。双语词典与语言状态在 `lib/i18n.tsx`（`useSite().t()`）。
 
@@ -44,14 +44,14 @@ npm test
 ## 修改内容
 
 - **文案**：`lib/i18n.tsx` 的 `translations`（zh/en 各一份），不造事实
-- **作品/经历**：`components/Resume.tsx` 的 `PROJECTS`/`WORKS`/`EDU_ROWS`/`SKILL_ROWS`/`EXP_ROWS`；链接指向真实仓库
-- **工序状态**：`components/Hero.tsx` 的 `criteria` 数组（在岗/规划中）
+- **作品/背景**：`components/Resume.tsx` 的 `CARDS` / `BACKGROUND_ROWS`；链接指向真实仓库
+- **首屏标签**：`components/Hero.tsx` 的 `TAG_KEYS` + `lib/i18n.tsx` 的 `tag*`
 - **令牌/排版**：`public/tokens.css`（颜色、字体）；页面布局在 `app/globals.css`
 - **头像/简历**：替换 `public/assets/profile.png` 与 `public/assets/resume.pdf`
 
 ## GitHub Pages 发布
 
-推送 `main` 后 `.github/workflows/deploy.yml` 自动静态导出（`out/`）并经 `actions/deploy-pages` 发布。验证：
+推送 `main` 后 `.github/workflows/deploy.yml` 自动静态导出（`out/`）并发布到 `gh-pages` 分支。验证：
 
 ```bash
 curl -I https://chenxiaoyou.github.io/

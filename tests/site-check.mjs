@@ -40,11 +40,11 @@ expect(nextConfig.includes("output: \"export\""), "Next.js should generate stati
 
 expect(workflow.includes("branches: [main]"), "deploy workflow should trigger on pushes to main");
 expect(workflow.includes("node-version: 22"), "deploy workflow should pin Node 22 for Next.js");
-expect(workflow.includes("path: out"), "deploy workflow should upload the static export output");
-expect(workflow.includes("actions/deploy-pages"), "deploy workflow should publish with actions/deploy-pages");
+expect(workflow.includes("publish_dir: ./out"), "deploy workflow should publish the static export output");
+expect(workflow.includes("peaceiris/actions-gh-pages"), "deploy workflow should publish the static export to gh-pages");
 
 // Hallmark 定制：stamp、tokens、base
-expect(pageCss.includes("/* Hallmark · v2.1.0"), "page CSS should start with the Hallmark stamp (v2.1.0 restyle)");
+expect(pageCss.includes("/* Hallmark · v2.2.0"), "page CSS should start with the Hallmark stamp (v2.2.0 route A)");
 expect(pageCss.includes("redesign: restyle"), "page CSS should declare the restyle depth");
 expect(pageCss.includes("idea:"), "stamp should carry the idea line");
 expect(pageCss.includes("posture:"), "stamp should declare the colour posture");
@@ -74,8 +74,9 @@ expect(siteNav.includes("nav__toggle"), "navigation should keep the phone menu t
 expect(siteNav.includes("nav__theme"), "navigation should offer the theme toggle");
 expect(siteNav.includes("nav__cta--fill") && siteNav.includes("nav__cta--ghost"), "navigation should carry the mail and resume CTAs top-right");
 expect(siteNav.includes("skip-link"), "navigation should keep the skip link");
-expect(hero.includes("report-meta"), "hero should carry the acceptance-report header");
-expect(hero.includes("criteria"), "hero should carry the four-stage criteria rail");
+expect(hero.includes("hero__headline"), "hero should carry the one-line positioning headline");
+expect(hero.includes("hero__tags"), "hero should list focus tags instead of the report criteria rail");
+expect(hero.includes("hero__actions"), "hero should expose primary CTAs");
 expect(hero.includes("/assets/profile.png"), "hero should show the client's own avatar as the specimen");
 // v1.7.2：CTA 只保留右上角导航一处（icon + 文案，窄屏纯 icon）
 expect(siteNav.includes("mailto:chenxiaoyou19@gmail.com"), "nav primary action should be the real email");
@@ -83,18 +84,18 @@ expect(siteNav.includes("/assets/resume.pdf"), "nav should offer the resume down
 expect(siteNav.includes("nav__cta-icon"), "nav CTAs should render with icons");
 expect(!hero.includes("hero__kicker"), "hero should not carry an eyebrow");
 
-// v1.8.0：六段式简历（教育背景 / 专业技能 / 工作经历 / 项目经历 / 我的作品 / 自我评价）
-for (const sectionId of ["education", "skills", "experience", "projects", "works", "evaluation"]) {
+// v2.2.0：路线 A 四块（首屏 + 背景 + 代表作 + 页脚）
+for (const sectionId of ["experience", "works"]) {
   expect(resume.includes(`id="${sectionId}"`), `resume should carry the ${sectionId} section`);
 }
-expect(resume.includes("work-index"), "resume should render projects as a numbered index");
+expect(resume.includes("work-cards"), "resume should render selected work as cards");
 expect(resume.includes("api_auto_test"), "resume should include api_auto_test");
 expect(resume.includes("github.com/chenxiaoyou/api_auto_test"), "api_auto_test card should link its repository");
 expect(resume.includes('ToolIcon id="python"') || resume.includes("icon: \"python\""), "resume chips should use real colour tool logos");
 expect(resume.includes("workEvalStatus"), "resume should include the AI evaluation practice");
 expect(!resume.includes("/blogs/"), "resume should not link to removed blog routes");
-expect(resume.includes("rows__name") && resume.includes("rows__value"), "resume should render education, skills and experience as ruled ledgers");
-expect(resume.includes("skillsTbd") && resume.includes("evalBody"), "missing resume content should use marked placeholders");
+expect(resume.includes("rows__name") && resume.includes("rows__value"), "resume should render background as ruled rows");
+expect(!resume.includes("skillsTbd") && !resume.includes("evalBody"), "resume should not expose placeholder blocks");
 
 expect(i18n.includes("五年多，只做一件事"), "i18n should keep the real experience fact");
 expect(i18n.includes("Five years, one job"), "i18n should keep the English experience fact");
@@ -109,7 +110,7 @@ expect(footer.includes("footer__legal"), "footer should render the legal row");
 expect(footer.includes("socials"), "footer should keep the GitHub mark");
 
 expect(pageCss.includes(".work-chip"), "page CSS should style the work chips");
-expect(pageCss.includes(".criteria"), "page CSS should style the criteria rail");
+expect(pageCss.includes(".work-card"), "page CSS should style the work cards");
 expect(pageCss.includes(".footer__mail"), "page CSS should style the plain email contact");
 
 // 静态产物
