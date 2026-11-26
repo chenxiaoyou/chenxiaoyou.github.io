@@ -1,0 +1,4 @@
+:HL["https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
+0:{"b":"EDTeiwTiGJb-lLfoei0mP","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
