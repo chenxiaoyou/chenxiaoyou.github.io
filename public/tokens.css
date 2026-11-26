@@ -28,6 +28,7 @@
   --tracking-display: -0.015em;
   /* taste moments 与组件的别名层 */
   --bg: var(--color-paper); --ink: var(--color-ink); --muted: var(--color-muted); --accent: var(--color-accent); --line: var(--color-rule);
+  --font-plex-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-mono: var(--font-plex-mono), monospace;
   --dg-ink: oklch(22% 0.01 255); --dg-muted: oklch(46% 0.014 255); --dg-accent: oklch(42% 0.12 255); --dg-border: oklch(85% 0.008 255); --dg-line: oklch(85% 0.008 255); --dg-faint: oklch(70% 0.01 255); --dg-dot: oklch(80% 0.008 255); --dg-node: oklch(100% 0.002 250);
 }

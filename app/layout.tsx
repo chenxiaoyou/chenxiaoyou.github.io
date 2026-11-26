@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SiteProvider } from "@/lib/i18n";
@@ -35,12 +34,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f8fa",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f8fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#14171c" },
+  ],
 };
 
-// 主题引导：首帧渲染前落定深浅（存档 > 系统偏好 > 浅色），避免切换前闪色
+// 主题与动效引导：首帧渲染前落定深浅（存档 > 系统偏好 > 浅色）并挂载 .js 类，避免闪色与动效失效
 const themeBootstrap =
-  "(function(){try{var s=localStorage.getItem('site-theme');var t=(s==='dark'||s==='light')?s:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch(e){}})()";
+  "(function(){var r=document.documentElement;r.classList.add('js');try{var s=localStorage.getItem('site-theme');var t=(s==='dark'||s==='light')?s:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');r.dataset.theme=t;var l=localStorage.getItem('site-language');if(l==='zh'||l==='en'){r.dataset.lang=l;r.lang=l==='zh'?'zh-CN':'en';}}catch(e){}})()";
 
 // 页面 CSS 以内联方式进 HTML：tokens/base 先内联（异步 @import 会造成整页弹跳），stamp 原样保留
 const tokensCss = readFileSync(join(process.cwd(), "public", "tokens.css"), "utf8");
@@ -57,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@400;500;600&family=Onest:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: pageCss }} />

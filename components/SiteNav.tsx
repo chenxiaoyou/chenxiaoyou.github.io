@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/lib/i18n";
 
 const NAV_ITEMS = [
@@ -12,6 +12,8 @@ const NAV_ITEMS = [
 export default function SiteNav() {
   const { t, toggleLang } = useSite();
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string>("");
+  const headerRef = useRef<HTMLElement | null>(null);
 
   const toggleTheme = () => {
     const root = document.documentElement;
@@ -22,15 +24,91 @@ export default function SiteNav() {
     } catch {}
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    const onPointerDown = (event: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const mediaQuery = window.matchMedia("(min-width: 60.0625rem)");
+    const onViewportChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onPointerDown);
+    mediaQuery.addEventListener("change", onViewportChange);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onPointerDown);
+      mediaQuery.removeEventListener("change", onViewportChange);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const updateActive = () => {
+      if (window.scrollY < 140) {
+        setActiveId("");
+        return;
+      }
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 48;
+      if (nearBottom) {
+        setActiveId("contact");
+        return;
+      }
+      const triggerLine = window.innerHeight * 0.32;
+      let current = "";
+      for (const item of NAV_ITEMS) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= triggerLine) {
+          current = item.id;
+        }
+      }
+      setActiveId(current);
+    };
+
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+    };
+  }, []);
+
   return (
-    <header className="nav">
+    <header className="nav" ref={headerRef}>
       <div className="container nav__bar">
         <a className="skip-link" href="#top">{t("skip")}</a>
-        <a className="wordmark" href="#top" aria-label={`${t("name")}，回到页首`}>{t("name")}</a>
-        <nav className="nav__links" aria-label="Main">
-          {NAV_ITEMS.map((item) => (
-            <a className="nav__link" key={item.id} href={`#${item.id}`}>{t(item.key)}</a>
-          ))}
+        <a
+          className="wordmark"
+          href="#top"
+          aria-label={t("wordmarkAria")}
+          onClick={() => setOpen(false)}
+        >
+          {t("name")}
+        </a>
+        <nav className="nav__links" aria-label={t("navMainAria")}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeId === item.id;
+            return (
+              <a
+                className={`nav__link${isActive ? " is-active" : ""}`}
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={isActive ? "true" : undefined}
+              >
+                {t(item.key)}
+              </a>
+            );
+          })}
         </nav>
         <div className="nav__actions">
           <a className="nav__cta nav__cta--ghost" href="/assets/resume.pdf" download aria-label={t("ctaResume")} title={t("ctaResume")}>
@@ -49,7 +127,8 @@ export default function SiteNav() {
             className="nav__theme"
             type="button"
             onClick={toggleTheme}
-            aria-label="切换深浅模式 Toggle dark mode"
+            aria-label={t("themeToggleAria")}
+            title={t("themeToggleAria")}
           >
             <svg className="icon-moon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -63,7 +142,8 @@ export default function SiteNav() {
             className="nav__lang"
             type="button"
             onClick={toggleLang}
-            aria-label="切换语言 Switch language"
+            aria-label={t("langToggleAria")}
+            title={t("langToggleAria")}
           >
             {t("langOther")}
           </button>
@@ -71,6 +151,7 @@ export default function SiteNav() {
             className="nav__toggle"
             type="button"
             aria-expanded={open}
+            aria-controls="mobile-nav-sheet"
             aria-label={t("menuLabel")}
             onClick={() => setOpen((value) => !value)}
           >
@@ -83,10 +164,21 @@ export default function SiteNav() {
         </div>
       </div>
       {open && (
-        <nav className="nav__sheet" aria-label="Mobile">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.id} href={`#${item.id}`} onClick={() => setOpen(false)}>{t(item.key)}</a>
-          ))}
+        <nav className="nav__sheet" id="mobile-nav-sheet" aria-label={t("navMobileAria")}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeId === item.id;
+            return (
+              <a
+                key={item.id}
+                className={isActive ? "is-active" : undefined}
+                href={`#${item.id}`}
+                aria-current={isActive ? "true" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {t(item.key)}
+              </a>
+            );
+          })}
         </nav>
       )}
     </header>

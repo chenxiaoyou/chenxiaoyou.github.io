@@ -1,9 +1,29 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useSite } from "@/lib/i18n";
+
+const EMAIL = "chenxiaoyou19@gmail.com";
 
 export default function SiteFooter() {
   const { t } = useSite();
+  const [copied, setCopied] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
 
   return (
     <footer className="footer" id="contact" aria-labelledby="close-h">
@@ -12,8 +32,31 @@ export default function SiteFooter() {
           <h2 id="close-h">{t("closeH")}</h2>
           <p>{t("closeLine")}</p>
         </div>
-        <a className="footer__mail" href="mailto:chenxiaoyou19@gmail.com">chenxiaoyou19@gmail.com</a>
+        <div className="footer__contact">
+          <a className="footer__mail" href="mailto:chenxiaoyou19@gmail.com">{EMAIL}</a>
+          <button
+            className={`footer__copy${copied ? " is-copied" : ""}`}
+            type="button"
+            onClick={handleCopyEmail}
+            aria-live="polite"
+          >
+            {copied ? (
+              <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="m3 8.5 3.2 3.2L13 4.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M10.5 5.5V3.8A1.3 1.3 0 0 0 9.2 2.5H3.8A1.3 1.3 0 0 0 2.5 3.8v5.4a1.3 1.3 0 0 0 1.3 1.3h1.7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            )}
+            <span>{copied ? t("copiedEmail") : t("copyEmail")}</span>
+          </button>
+        </div>
         <ul className="footer__links">
+          <li>
+            <a href="/assets/resume.pdf" download>{t("ctaResume")}</a>
+          </li>
           <li>
             <a href="https://github.com/chenxiaoyou" target="_blank" rel="noopener noreferrer">GitHub</a>
           </li>

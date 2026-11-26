@@ -4,10 +4,12 @@ import { useSite } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/i18n";
 
 function ToolIcon({ id }: { id: string }) {
-  return <img src={`/assets/icons/${id}.svg`} alt="" width="24" height="24" loading="lazy" />;
+  return <img src={`/assets/icons/${id}.svg`} alt="" width="16" height="16" loading="lazy" />;
 }
 
-type Chip = { icon?: string; label: string };
+type Chip =
+  | { icon?: string; label: string; labelKey?: undefined }
+  | { icon?: string; label?: undefined; labelKey: TranslationKey };
 
 type LedgerEntry = {
   titleKey: TranslationKey;
@@ -17,13 +19,21 @@ type LedgerEntry = {
   chips: readonly Chip[];
   href: string | null;
   kind: "work" | "side";
+  tone: "active" | "planned" | "learning";
 };
 
-type Row = { nameKey: TranslationKey; subKey?: TranslationKey; valueKey: TranslationKey };
+type Row = {
+  nameKey: TranslationKey;
+  subKey?: TranslationKey;
+  valueKey: TranslationKey;
+  logo: string;
+  current?: boolean;
+};
 
 const CARDS: readonly LedgerEntry[] = [
   {
     kind: "work",
+    tone: "active",
     titleKey: "workApiTitle",
     statusKey: "workApiStatus",
     lineKey: "workApiLine",
@@ -37,19 +47,21 @@ const CARDS: readonly LedgerEntry[] = [
   },
   {
     kind: "work",
+    tone: "planned",
     titleKey: "workEvalTitle",
     statusKey: "workEvalStatus",
     lineKey: "workEvalLine",
     bodyKey: "workEvalBody",
     chips: [
-      { label: "评测集" },
-      { label: "指标体系" },
+      { labelKey: "chipEvalSet" },
+      { labelKey: "chipMetrics" },
       { label: "LLM-as-judge" },
     ],
     href: null,
   },
   {
     kind: "side",
+    tone: "learning",
     titleKey: "workMewcodeTitle",
     statusKey: "workMewcodeStatus",
     lineKey: "workMewcodeLine",
@@ -63,22 +75,39 @@ const CARDS: readonly LedgerEntry[] = [
   },
   {
     kind: "side",
+    tone: "learning",
     titleKey: "workMewhelpTitle",
     statusKey: "workMewhelpStatus",
     lineKey: "workMewhelpLine",
     bodyKey: "workMewhelpBody",
     chips: [
       { icon: "langfuse", label: "RAG" },
-      { label: "检索" },
+      { labelKey: "chipRetrieval" },
     ],
     href: null,
   },
 ];
 
 const BACKGROUND_ROWS: readonly Row[] = [
-  { nameKey: "expBdName", subKey: "expBdSub", valueKey: "expBdValue" },
-  { nameKey: "expBuptName", subKey: "expBuptSub", valueKey: "expBuptValue" },
-  { nameKey: "expNjuptName", subKey: "expNjuptSub", valueKey: "expNjuptValue" },
+  {
+    nameKey: "expBdName",
+    subKey: "expBdSub",
+    valueKey: "expBdValue",
+    logo: "/assets/logo-bytedance.svg",
+    current: true,
+  },
+  {
+    nameKey: "expBuptName",
+    subKey: "expBuptSub",
+    valueKey: "expBuptValue",
+    logo: "/assets/logo-bupt.png",
+  },
+  {
+    nameKey: "expNjuptName",
+    subKey: "expNjuptSub",
+    valueKey: "expNjuptValue",
+    logo: "/assets/logo-njupt.png",
+  },
 ];
 
 function SectionHead({ h, hKey, lineKey }: { h: string; hKey: TranslationKey; lineKey?: TranslationKey }) {
@@ -96,11 +125,16 @@ function Rows({ rows }: { rows: readonly Row[] }) {
   return (
     <ul className="rows">
       {rows.map((row) => (
-        <li key={row.nameKey}>
-          <span className="rows__name">
-            {t(row.nameKey)}
-            {row.subKey ? <small>{t(row.subKey)}</small> : null}
-          </span>
+        <li key={row.nameKey} data-current={row.current ? "true" : undefined}>
+          <div className="rows__main">
+            <span className="rows__logo" aria-hidden="true">
+              <img src={row.logo} alt="" width="24" height="24" loading="lazy" />
+            </span>
+            <span className="rows__name">
+              {t(row.nameKey)}
+              {row.subKey ? <small>{t(row.subKey)}</small> : null}
+            </span>
+          </div>
           <span className="rows__value">{t(row.valueKey)}</span>
         </li>
       ))}
@@ -113,19 +147,23 @@ function WorkCards({ entries }: { entries: readonly LedgerEntry[] }) {
   return (
     <ul className="work-cards">
       {entries.map((entry) => (
-        <li className="work-card" key={entry.titleKey} data-kind={entry.kind}>
+        <li className="work-card" key={entry.titleKey} data-kind={entry.kind} data-tone={entry.tone}>
           <div className="work-card__head">
             <span className="work-card__kind">{t(entry.kind === "work" ? "cardKindWork" : "cardKindSide")}</span>
             <span className="work-card__status">{t(entry.statusKey)}</span>
           </div>
           <h3>{t(entry.titleKey)}</h3>
           <div className="work-stack">
-            {entry.chips.map((chip) => (
-              <span className="work-chip" key={chip.label}>
-                {chip.icon ? <ToolIcon id={chip.icon} /> : null}
-                {chip.label}
-              </span>
-            ))}
+            {entry.chips.map((chip) => {
+              const text = chip.labelKey ? t(chip.labelKey) : chip.label;
+              const key = chip.labelKey ?? chip.label;
+              return (
+                <span className="work-chip" key={key}>
+                  {chip.icon ? <ToolIcon id={chip.icon} /> : null}
+                  {text}
+                </span>
+              );
+            })}
           </div>
           <p>
             {t(entry.lineKey)} {t(entry.bodyKey)}
@@ -133,6 +171,9 @@ function WorkCards({ entries }: { entries: readonly LedgerEntry[] }) {
           {entry.href ? (
             <a className="link work-card__link" href={entry.href} target="_blank" rel="noopener noreferrer">
               {t("projectRepoLink")}
+              <svg className="link__arrow" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           ) : null}
         </li>

@@ -7,12 +7,18 @@ export type Lang = "zh" | "en";
 
 export const translations = {
   zh: {
+    pageTitle: "辰小右：测试开发工程师，把质量风险拦在发布之前",
     skip: "跳到正文",
     name: "辰小右",
+    wordmarkAria: "辰小右，回到页首",
+    navMainAria: "主导航",
+    navMobileAria: "移动端导航",
     navExperience: "背景",
     navWorks: "代表作",
     navContact: "联系",
-    menuLabel: "菜单",
+    menuLabel: "打开或收起菜单",
+    themeToggleAria: "切换深浅主题",
+    langToggleAria: "Switch to English",
     langOther: "EN",
     h1: "辰小右",
     heroEyebrow: "字节跳动 · 2021 年至今",
@@ -48,6 +54,9 @@ export const translations = {
     workEvalStatus: "规划中",
     workEvalLine: "用测试开发的方法评测 Agent。",
     workEvalBody: "先建评测集和指标体系，再谈 LLM-as-judge 与效果回归。",
+    chipEvalSet: "评测集",
+    chipMetrics: "指标体系",
+    chipRetrieval: "检索",
     projectRepoLink: "查看仓库",
     expBdName: "字节跳动",
     expBdSub: "测试开发工程师",
@@ -60,17 +69,25 @@ export const translations = {
     expNjuptValue: "2012 - 2016",
     closeH: "聊质量工程，写邮件最快",
     closeLine: "邮件通常当天回复。",
+    copyEmail: "复制邮箱",
+    copiedEmail: "已复制",
     footerLegal: "页面中的产品名称与图标归其各自所有者所有。",
     footerTop: "回到顶部",
     avatarAlt: "辰小右的头像",
   },
   en: {
+    pageTitle: "Chen Xiaoyou · Test Development Engineer",
     skip: "Skip to content",
     name: "Chen Xiaoyou",
+    wordmarkAria: "Chen Xiaoyou, back to top",
+    navMainAria: "Main navigation",
+    navMobileAria: "Mobile navigation",
     navExperience: "Background",
     navWorks: "Work",
     navContact: "Contact",
-    menuLabel: "Menu",
+    menuLabel: "Toggle menu",
+    themeToggleAria: "Toggle color theme",
+    langToggleAria: "切换为中文",
     langOther: "中",
     h1: "Chen Xiaoyou",
     heroEyebrow: "ByteDance · since 2021",
@@ -106,6 +123,9 @@ export const translations = {
     workEvalStatus: "Planned",
     workEvalLine: "Evaluating agents the way testers do.",
     workEvalBody: "Eval sets and metrics first, then LLM-as-judge and quality regression.",
+    chipEvalSet: "Eval sets",
+    chipMetrics: "Metrics",
+    chipRetrieval: "Retrieval",
     projectRepoLink: "View repo",
     expBdName: "ByteDance",
     expBdSub: "Test Development Engineer",
@@ -118,6 +138,8 @@ export const translations = {
     expNjuptValue: "2012 - 2016",
     closeH: "The fastest way in is email",
     closeLine: "I usually reply the same day.",
+    copyEmail: "Copy email",
+    copiedEmail: "Copied",
     footerLegal: "Product names and logos on this page belong to their owners.",
     footerTop: "Back to top",
     avatarAlt: "Chen Xiaoyou's avatar",
@@ -147,6 +169,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     document.documentElement.dataset.lang = lang;
+    document.title = translations[lang].pageTitle;
     try {
       localStorage.setItem("site-language", lang);
     } catch {}
